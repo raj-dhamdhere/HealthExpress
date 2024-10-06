@@ -1,13 +1,14 @@
 import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Test from "./Components/Test";
+import Test from "./Components/Test.js";
+import About from "./Components/About";
 // import Login from "./Components/Login";
 // import Terms from "./Components/Terms";
 // import Privacy from "./Components/Privacy";
 // import Refund from "./Components/Refund";
 // import Disclaimer from "./Components/Disclaimer";
-// import About from "./Components/About";
+
 // import Contact from "./Components/Contact";
 // import Pricing from "./Components/Pricing";
 // import Rif from "./Components/Refundnew";
@@ -38,8 +39,8 @@ class App extends React.Component {
 			<Router>
 				<div className="App">
 					<Route exact path="/" component={Test} />
-					{/* <Route path="/about" component={About} />
-					<Route path="/contact" component={Contact} />
+					<Route path="/about" component={About} />
+					{/* <Route path="/contact" component={Contact} />
 					<Route path="/pricing" component={Pricing} />
 					<Route path="/Terms" component={Terms} />
 					<Route path="/privacy" component={Privacy} />

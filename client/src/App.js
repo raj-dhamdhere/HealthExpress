@@ -2,9 +2,9 @@ import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Test from "./Components/Test.js";
-import About from "./Components/About";
-// import Login from "./Components/Login";
-// import Terms from "./Components/Terms";
+import About from "./Components/About.js";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
 // import Privacy from "./Components/Privacy";
 // import Refund from "./Components/Refund";
 // import Disclaimer from "./Components/Disclaimer";
@@ -40,9 +40,9 @@ class App extends React.Component {
 				<div className="App">
 					<Route exact path="/" component={Test} />
 					<Route path="/about" component={About} />
-					{/* <Route path="/contact" component={Contact} />
-					<Route path="/pricing" component={Pricing} />
-					<Route path="/Terms" component={Terms} />
+					<Route path="/register" component={Register} />
+					<Route path="/login" component={Login} />
+					{/* <Route path="/Terms" component={Terms} />
 					<Route path="/privacy" component={Privacy} />
 					<Route path="/refund" component={Refund} />
 					<Route path="/Disclaimer" component={Disclaimer} />

@@ -12,7 +12,7 @@ export default function NavbarComponent() {
 						<Nav className="mr-auto">
 							<Nav.Link href="/" style={{color:"black"}}>Home</Nav.Link>
 							<Nav.Link href="/about" style={{color:"black"}}>About Us</Nav.Link>
-							<Nav.Link href="/pricing" style={{color:"black"}}>Register</Nav.Link>
+							<Nav.Link href="/register" style={{color:"black"}}>Register</Nav.Link>
 							<Nav.Link href="/login"style={{color:"black"}}>Login</Nav.Link>
 							{/* <Nav.Link href="/signup">Signup</Nav.Link> */}
 						</Nav>

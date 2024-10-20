@@ -1,11 +1,11 @@
 import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Test from "./Components/Test.js";
-import About from "./Components/About.js";
-import Login from "./Components/Login";
-import Register from "./Components/Register";
-import Dashboard from "./Components/Dashboard/Dashboard.js";
+import Test from "./components/Test.js";
+import About from "./components/About.js";
+import Login from "./components/Login.js";
+import Register from "./components/Register.js";
+import Dashboard from "./components/Dashboard/Dashboard.js";
 // import Privacy from "./Components/Privacy";
 // import Refund from "./Components/Refund";
 // import Disclaimer from "./Components/Disclaimer";
@@ -39,11 +39,11 @@ class App extends React.Component {
 		return (
 			<Router>
 				<div className="App">
-					<Route exact path="/HomeCommented" component={Test} />
+					<Route exact path="/" component={Test} />
 					<Route path="/about" component={About} />
 					<Route path="/register" component={Register} />
 					<Route path="/login" component={Login} />
-					<Route path="/" component={Dashboard} />
+					
 					{/* <Route path="/Terms" component={Terms} />
 					<Route path="/privacy" component={Privacy} />
 					<Route path="/refund" component={Refund} />

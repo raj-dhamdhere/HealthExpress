@@ -7,9 +7,9 @@ import Carousel from 'react-bootstrap/Carousel';
 import FormControl from 'react-bootstrap/FormControl';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import NavbarComponent from "../Components/Navbar.js";
+import NavbarComponent from "./Navbar.js";
 
-import RegisterComponent from "../Components/RegisterForm.js";
+import RegisterComponent from "./RegisterForm.js";
 
 import {
     BrowserRouter as Router,

@@ -5,10 +5,7 @@ import crypto from "crypto";
 // Generate a random 32-byte encryption key
 const encryptionKey = "Rajdhamdhere-is-Migate-Goku-akir";
 
-const array1 = [];
-const array2 = [];
 
-const result = {};
 
 // Function to encrypt data
 function encryptData(plaintext) {
@@ -29,15 +26,38 @@ function decryptData(ciphertext) {
   return decrypted;
 }
 
+async function generateUniqueId(prefix, collection) {
+    let customId;
+    let exists = true;
+
+    while (exists) {
+        const randomNum = Math.floor(Math.random() * 1000000);
+        customId = `${prefix}${randomNum}`;
+
+        // Check if this ID already exists in the collection
+        const user = await db.collection(collection).findOne({ _id: customId });
+        exists = !!user; // true if user exists, false otherwise
+    }
+
+    return customId;
+}
+
 // // Example usage
 // const plaintext = 'This is a secret message';
 
 
 class User {
+	
 	constructor() {}
 
 	async registerUser(userData) {
-
+		console.log(userData)
+		let array1 = [];
+		let array2 = [];
+		
+		let result = {};
+		
+		let uniqueId = await generateUniqueId("HE", userCollection);
 		// const decryptedData = decryptData(ciphertext);
 		// console.log('Decrypted data:', decryptedData);
 		
@@ -62,10 +82,12 @@ class User {
 			result[array1[i]] = array2[i];
 		}
 
+		console.log(uniqueId);
 		console.log(result);
 
 
-		let response = await db.collection(userCollection).insertOne(result);
+		let response = await db.collection(userCollection).insertOne({_id: uniqueId,...result});
+		
 		//let response = await db.collection(userCollection).find({ number: userData.number }).toArray();
 
 		// if (response[0] == undefined) {

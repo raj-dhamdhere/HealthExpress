@@ -576,6 +576,8 @@ const Register = () => {
 					</div>
 				</div>
 			</section>
+
+			
 		</div>
 	);
 };

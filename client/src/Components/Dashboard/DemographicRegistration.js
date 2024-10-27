@@ -21,10 +21,25 @@ const Register = () => {
   const [address, setaddress] = useState();
   const [toggleState, setToggleState] = useState(false);
   const [insnumber, setinsnumber] = useState();
+  const [storedUser, setStoredUser] = useState(null);
+
+  const buttonStyle = {
+    width: '100px',  // Set the desired width
+    height: '40px',  // Set the desired height
+    margin: '0 10px' // Margin to space out the buttons
+  };
 
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
   };
+
+  // Retrieve session storage data on component load
+  useEffect(() => {
+    const storedUserdata = sessionStorage.getItem("user");
+    if (storedUserdata) {
+      setStoredUser(JSON.parse(storedUserdata));
+    }
+  }, []); // Empty dependency array to run only on mount
 
   // const checkPhoneNo = async (e) => {
   // 	await setnumber(e);
@@ -37,6 +52,8 @@ const Register = () => {
   // 		if (!response.data.Success) setPhoneCheckErr(response.data.message);
   // 	}
   // };
+
+
 
   const onsubmit = async (e) => {
     //const isValid = formValidation();
@@ -59,6 +76,7 @@ const Register = () => {
         email: email,
         county: county,
         pincode: pincode,
+        dob:selectedDate,
         pps: pps,
         address: address,
         haveInsurrance: toggleState.toString(),
@@ -167,7 +185,17 @@ const Register = () => {
                   </div>
 
                   <div className="col-md-4">
-                    <h6>Generated MRN</h6>
+                    <h6
+                      style={{
+                        fontSize: "1.25rem",
+                        color: "#007bff",
+                        fontWeight: "bold",
+                        fontFamily: "Arial, sans-serif",
+                      }}
+                    >
+                      Generated MRN :{" "}
+                      {storedUser ? storedUser.id || "MRN" : "Loading..."}
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -368,7 +396,7 @@ const Register = () => {
                 </div>
 
                 <div className="text-center">
-                  <Button
+                  <Button style = {buttonStyle}
                     onClick={() => {
                       onsubmit();
                     }}
@@ -376,7 +404,7 @@ const Register = () => {
                     Edit
                   </Button>
                   &nbsp; &nbsp; &nbsp;
-                  <Button
+                  <Button style = {buttonStyle}
                     onClick={() => {
                       onsubmit();
                     }}

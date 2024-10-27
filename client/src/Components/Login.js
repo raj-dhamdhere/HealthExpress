@@ -8,7 +8,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import NavbarComponent from "./Navbar.js";
-
+import LoginComponent from "./LoginForm.js";
 
 
 import {
@@ -28,7 +28,7 @@ class About extends React.Component {
                 </header>
 
 
-
+				<LoginComponent></LoginComponent>
 
                 <footer id="footer">
 					<div class="footer-top">

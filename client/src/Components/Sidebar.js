@@ -43,7 +43,7 @@ const Sidebar = () => {
           color: "#868dfb !important",
         },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          color: "#007bff !important", // Set active item color to blue
         },
       }}
     >
@@ -77,7 +77,7 @@ const Sidebar = () => {
                     width="200px"
                     className="img-fluid"
                     alt=""
-                    style={{ cursor: "default" }} // Set cursor to default
+                    style={{ cursor: "default" }}
                   />
                 </Box>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -91,7 +91,7 @@ const Sidebar = () => {
             <MenuItem
               active={selected === "Dashboard"}
               style={{ color: colors.grey[100] }}
-              onClick={() => handleNavigation("/")}
+              onClick={() => handleNavigation("/dashboard")}
               icon={<HomeOutlinedIcon />}
             >
               <Typography>Dashboard</Typography>
@@ -99,26 +99,26 @@ const Sidebar = () => {
             <MenuItem
               active={selected === "DemographicDetails"}
               style={{ color: colors.grey[100] }}
-              onClick={() => handleNavigation("/about")}
+              onClick={() => handleNavigation("/dashboard")}
               icon={<PeopleOutlinedIcon />}
             >
-              <Typography>About</Typography>
+              <Typography>Demographic Details</Typography>
             </MenuItem>
             <MenuItem
               active={selected === "AppointmentLists"}
               style={{ color: colors.grey[100] }}
-              onClick={() => handleNavigation("/register")}
+              onClick={() => handleNavigation("/dashboard")}
               icon={<ContactsOutlinedIcon />}
             >
-              <Typography>Register</Typography>
+              <Typography>Appointment Lists</Typography>
             </MenuItem>
             <MenuItem
               active={selected === "Summary"}
               style={{ color: colors.grey[100] }}
-              onClick={() => handleNavigation("/Login")}
+              onClick={() => handleNavigation("/dashboard")}
               icon={<ReceiptOutlinedIcon />}
             >
-              <Typography>Login</Typography>
+              <Typography>Summary</Typography>
             </MenuItem>
 
             <Typography

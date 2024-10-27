@@ -101,22 +101,42 @@ class User {
 		// }
 	}
 
-	async loginUser(userData) {
-		try {
-			let response = await db.collection(userCollection).findOne({ number: userData.number});
-	
-			const decryptedData = decryptData(response.password);
-			let decryptedDataFinal = decryptedData.toString();			
+async loginUser(userData) {
+  console.log(userData);
+  try {
+    
+    let response = await db.collection(userCollection).findOne({ number: userData.number });
 
-			if (userData.password == decryptedDataFinal) {
-				return { success: true };
-			} else {
-				return { success: false };
-			}
-		} catch (e) {
-			return { success: false, message: String(e) };
-		}
-	}
+    const decryptedData = decryptData(response.password);
+    let decryptedDataFinal = decryptedData.toString();
+
+    let decryptedidFinal = response._id
+
+
+	const decryptedname = decryptData(response.fname);
+    let decryptednameFinal = decryptedname.toString();
+
+
+    if (userData.password === decryptedDataFinal) {
+    
+      return {
+        success: true,
+        data: {
+          id: decryptedidFinal,
+          name: decryptednameFinal,
+          number: userData.number 	,
+          
+        },
+      };
+    } else {
+      
+      return { success: false, message: "Incorrect password" };
+    }
+  } catch (e) {
+    
+    return { success: false, message: `Error: ${String(e)}` };
+  }
+}
 
 
 	

@@ -16,7 +16,7 @@ const Register = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [pps, setpps] = useState();
   const [address, setaddress] = useState();
-  const [toggleState, setToggleState] = useState(false);
+  const [toggleState, setToggleState] = useState("no");
   const [insnumber, setinsnumber] = useState();
 
   const handleDateChange = (newDate) => {
@@ -46,10 +46,10 @@ const Register = () => {
         email: email,
         county: county,
         pincode: "",
-		dob:"",
+		    dob:"",
         pps: "",
         address: address,
-        haveInsurance: toggleState.toString(),
+        haveInsurance: "no",
         insurancenumber: "",
       });
 

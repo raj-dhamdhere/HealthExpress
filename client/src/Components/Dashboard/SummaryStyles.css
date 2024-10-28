@@ -1,0 +1,74 @@
+/* Container to center the table and add spacing */
+.dataGridContainer {
+    height: 500px;
+    width: 100%;
+    background-color: #f9f9f9; /* Light background for the container */
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style the DataGrid header cells */
+  .MuiDataGrid-columnHeaders {
+    background-color: rgba(173, 216, 230, 0.8); /* Faded light blue */
+    color: #003366; /* Dark text for better visibility */
+    font-weight: bold;
+    font-size: 16px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  /* Style individual header cells */
+  .MuiDataGrid-columnHeaderTitle {
+    font-weight: 600;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  
+  /* Style DataGrid rows */
+  .MuiDataGrid-row {
+    font-size: 15px;
+    color: #333333; /* Dark text for rows */
+    &:nth-of-type(even) {
+      background-color: rgba(173, 216, 230, 0.2); /* Lighter faded blue for even rows */
+    }
+  }
+  
+  /* Row hover effect */
+  .MuiDataGrid-row:hover {
+    background-color: rgba(173, 216, 230, 0.5) !important; /* Hover effect with faded blue */
+  }
+  
+  /* Selected row styling */
+  .MuiDataGrid-row.Mui-selected {
+    background-color: rgba(173, 216, 230, 0.6) !important; /* Faded blue for selected rows */
+    color: #003366; /* Dark text for contrast */
+    font-weight: 600;
+  }
+  
+  /* Pagination controls */
+  .MuiDataGrid-footerContainer {
+    background-color: rgba(173, 216, 230, 0.3); /* Faded light blue for footer */
+    padding: 8px 16px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  /* Toolbar customization */
+  .MuiDataGrid-toolbarContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: rgba(173, 216, 230, 0.8); /* Faded light blue for toolbar */
+    color: #003366; /* Dark text for contrast */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  /* Hover effect on header */
+  .MuiDataGrid-columnHeader:hover {
+    background-color: rgba(135, 206, 235, 0.6); /* Slightly darker faded blue for hover */
+  }
+  

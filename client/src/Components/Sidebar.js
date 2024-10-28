@@ -99,7 +99,7 @@ const Sidebar = () => {
             <MenuItem
               active={selected === "DemographicDetails"}
               style={{ color: colors.grey[100] }}
-              onClick={() => handleNavigation("/dashboard")}
+              onClick={() => handleNavigation("/demographicDetails")}
               icon={<PeopleOutlinedIcon />}
             >
               <Typography>Demographic Details</Typography>
@@ -107,7 +107,7 @@ const Sidebar = () => {
             <MenuItem
               active={selected === "AppointmentLists"}
               style={{ color: colors.grey[100] }}
-              onClick={() => handleNavigation("/dashboard")}
+              onClick={() => handleNavigation("/appointmentscheduling")}
               icon={<ContactsOutlinedIcon />}
             >
               <Typography>Appointment Lists</Typography>
@@ -115,7 +115,7 @@ const Sidebar = () => {
             <MenuItem
               active={selected === "Summary"}
               style={{ color: colors.grey[100] }}
-              onClick={() => handleNavigation("/dashboard")}
+              onClick={() => handleNavigation("/summarydetails")}
               icon={<ReceiptOutlinedIcon />}
             >
               <Typography>Summary</Typography>

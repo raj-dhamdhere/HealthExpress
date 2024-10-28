@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { TextField } from "@mui/material";
+import { TextField,Checkbox } from "@mui/material";
 import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
@@ -19,10 +19,11 @@ const Register = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [pps, setpps] = useState();
   const [address, setaddress] = useState();
-  const [toggleState, setToggleState] = useState(false);
+  const [toggleState, setToggleState] = useState("no");
   const [insnumber, setinsnumber] = useState();
   const [storedUser, setStoredUser] = useState(null);
-
+  const [disabledstate, setdisabledstate] = useState(true);
+  const [mrn, setmrn] = useState();
   const buttonStyle = {
     width: '100px',  // Set the desired width
     height: '40px',  // Set the desired height
@@ -33,13 +34,69 @@ const Register = () => {
     setSelectedDate(newDate);
   };
 
-  // Retrieve session storage data on component load
+  const handleChangeCheckbox = (event) => {
+    const newChecked = event.target.checked;
+    console.log(newChecked)
+    if(newChecked){
+      setToggleState("yes"); // Set the toggle state based on the checkbox status
+    }else{
+      setToggleState("no"); // Set the toggle state based on the checkbox status
+      setinsnumber(""); // Clear the insurance number if the checkbox is unchecked
+    }
+    
+  };
+
   useEffect(() => {
     const storedUserdata = sessionStorage.getItem("user");
     if (storedUserdata) {
-      setStoredUser(JSON.parse(storedUserdata));
+      const data = JSON.parse(storedUserdata);
+      setStoredUser(data);      
+      // Set mrn if it exists
+      if (data.id) {
+        setmrn(data.id);
+      } else {
+        console.error("ID is not available in stored user data.");
+      }
     }
   }, []); // Empty dependency array to run only on mount
+
+  useEffect(() => {
+    // Call getUserData when mrn is set
+    if (mrn) {
+      getUserData();
+    }
+  }, [mrn]); // Depend on mrn so it runs whenever mrn changes
+
+  const getUserData = async () => {
+    try {
+      let response = await axios.post(`${API_URL}/api/getUserData`, { id: mrn });
+      console.log("Response data:", response.data.data);
+
+      if (response.data && response.data.data) {
+        setfname(response.data.data.fname);
+        setlname(response.data.data.lname);
+        setnumber(response.data.data.number);
+        setemail(response.data.data.email);
+        setcounty(response.data.data.county);
+        setpincode(response.data.data.pincode);
+        setpps(response.data.data.pps);
+        setaddress(response.data.data.address);
+
+        setToggleState(response.data.data.haveInsurance);
+
+        setinsnumber(response.data.data.insurancenumber);
+
+      const dateFromResponse = new Date(response.data.data.dob); // Assuming dob is in ISO format
+      setSelectedDate(dateFromResponse); // Set the selected date
+      } else {
+        console.error("User data is not available in the response.");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+
 
   // const checkPhoneNo = async (e) => {
   // 	await setnumber(e);
@@ -53,7 +110,9 @@ const Register = () => {
   // 	}
   // };
 
-
+  const onEdit = async (e) => {
+    setdisabledstate(false);
+  };
 
   const onsubmit = async (e) => {
     //const isValid = formValidation();
@@ -69,7 +128,8 @@ const Register = () => {
     // console.log(insnumber)
 
     if (true) {
-      let response = await axios.post(`${API_URL}/api/registerUser`, {
+      let response = await axios.post(`${API_URL}/api/updateUserData`, {
+        id:mrn,
         fname: fname,
         lname: lname,
         number: number,
@@ -79,23 +139,15 @@ const Register = () => {
         dob:selectedDate,
         pps: pps,
         address: address,
-        haveInsurrance: toggleState.toString(),
+        haveInsurance: toggleState.toString(),
         insurancenumber: insnumber,
       });
 
       console.log(response);
       if (response.data.success == true) {
-        alert("Record Saved Successfully");
-        setfname("");
-        setlname("");
-        setnumber("");
-        setemail("");
-        setcounty("");
-        setpincode("");
-        setpps("");
-        setaddress("");
-        setToggleState(false);
-        setinsnumber("");
+        alert("Record Updated Successfully");
+        getUserData();
+        setdisabledstate(true);
       } else {
         alert("Record Saving Failed");
       }
@@ -204,6 +256,7 @@ const Register = () => {
                   <div className="col-md-6 form-group">
                     <Form.Label>First Name</Form.Label>
                     <input
+                      disabled={disabledstate}
                       type="text"
                       name="fname"
                       className="form-control"
@@ -220,6 +273,7 @@ const Register = () => {
                   <div className="col-md-6 form-group mt-3 mt-md-0">
                     <Form.Label>Last Name</Form.Label>
                     <input
+                      disabled={disabledstate}
                       type="text"
                       className="form-control"
                       name="lname"
@@ -237,6 +291,7 @@ const Register = () => {
                   <div className="col-md-6 form-group mt-3 mt-md-0">
                     <Form.Label>Mobile Number</Form.Label>
                     <input
+                      disabled={disabledstate}
                       type="number"
                       className="form-control"
                       name="number"
@@ -252,6 +307,7 @@ const Register = () => {
                   <div className="col-md-6 form-group mt-3 mt-md-0">
                     <Form.Label>Email</Form.Label>
                     <input
+                      disabled={disabledstate}
                       type="email"
                       className="form-control"
                       name="email"
@@ -270,6 +326,7 @@ const Register = () => {
                   <div className="col-md-6 form-group mt-3 mt-md-0">
                     <Form.Label>County</Form.Label>
                     <input
+                      disabled={disabledstate}
                       type="text"
                       className="form-control"
                       name="county"
@@ -286,6 +343,7 @@ const Register = () => {
                   <div className="col-md-6 form-group mt-3 mt-md-0">
                     <Form.Label>EIR Code</Form.Label>
                     <input
+                      disabled={disabledstate}
                       type="text"
                       className="form-control"
                       name="pincode"
@@ -308,6 +366,7 @@ const Register = () => {
                     <div>
                       <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DateTimePicker
+                          disabled={disabledstate}
                           value={selectedDate}
                           onChange={handleDateChange}
                           renderInput={(params) => (
@@ -328,6 +387,7 @@ const Register = () => {
                   <div className="col-md-6 form-group mt-3 mt-md-0">
                     <Form.Label>PPS Number</Form.Label>
                     <input
+                      disabled={disabledstate}
                       type="text"
                       className="form-control"
                       name="PPS"
@@ -345,6 +405,7 @@ const Register = () => {
                 <div className=" form-group mt-3 mt-md-0">
                   <Form.Label>Address</Form.Label>
                   <input
+                    disabled={disabledstate}
                     type="text"
                     className="form-control"
                     name="address"
@@ -364,7 +425,8 @@ const Register = () => {
                       <Form.Label>Have Insurance</Form.Label>
                     </div>
                     <div>
-                      <BootstrapSwitchButton
+                      {/* <BootstrapSwitchButton
+                        disabled = {disabledstate}
                         checked={false}
                         onlabel="yes"
                         onstyle="success"
@@ -374,6 +436,12 @@ const Register = () => {
                         onClick={(checked) => {
                           setToggleState(checked);
                         }}
+                      /> */}
+                      <Checkbox
+                        disabled={disabledstate}
+                        checked={toggleState === "yes"}
+                        onChange={handleChangeCheckbox}
+                        color="primary" // You can customize the color
                       />
                     </div>
                   </div>
@@ -381,6 +449,7 @@ const Register = () => {
                   <div className="col-md-6 form-group mt-3 mt-md-0">
                     <Form.Label>Insurance Number</Form.Label>
                     <input
+                      disabled={disabledstate || (toggleState === "no")}
                       type="text"
                       className="form-control"
                       name="Insurance"
@@ -395,16 +464,18 @@ const Register = () => {
                   </div>
                 </div>
 
-                <div className="text-center">
-                  <Button style = {buttonStyle}
+                <div className="text-center" style={{ paddingTop: "10px" }}>
+                  <Button
+                    style={buttonStyle}
                     onClick={() => {
-                      onsubmit();
+                      onEdit();
                     }}
                   >
                     Edit
                   </Button>
                   &nbsp; &nbsp; &nbsp;
-                  <Button style = {buttonStyle}
+                  <Button
+                    style={buttonStyle}
                     onClick={() => {
                       onsubmit();
                     }}

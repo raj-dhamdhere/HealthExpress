@@ -1,0 +1,19 @@
+/* Target only the DateTimePicker input field */
+.php-email-form .MuiOutlinedInput-root .MuiInputBase-input {
+    height: 25px !important; /* Set desired height */
+    padding: 10px 12px; /* Adjust padding if necessary */
+}
+
+/* Force full width for DateTimePicker input field */
+.php-email-form .MuiTextField-root,
+.php-email-form .MuiOutlinedInput-root {
+    width: 100% !important; /* Force full width */
+}
+
+
+.border-wrapper {
+    border: 2px solid lightblue; /* Adjust thickness and color as needed */
+    border-radius: 8px; /* Optional: adds rounded corners */
+    padding: 15px; /* Optional: adds some padding inside the border */
+    background-color: #f9f9f9; /* Optional: adds a light background color */
+}

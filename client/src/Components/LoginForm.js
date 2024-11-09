@@ -7,6 +7,7 @@ import { TextField } from "@mui/material";
 import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import Swal from "sweetalert2";
 const API_URL = "http://localhost:3001";
 
 const Login = () => {
@@ -81,7 +82,12 @@ const Login = () => {
         setUser(response.data.data); // Update local state
         window.open("/dashboard", "_self");
       } else {
-        alert("Record Saving Failed");
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: response.data.message,
+          confirmButtonText: "OK",
+        });
       }
     }
   };

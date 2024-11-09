@@ -38,5 +38,15 @@ async function getUserData(req, res) {
 	}
 }
 
+async function DeleteAllData(req, res) {
+	try {
+		let response = await new User().DeleteAllDataDetails(req.body);
+		res.send(response);
+	} catch (e) {
+		res.send({ success: false, error: e.toString() });
+	}
+}
+
+
 export default "";
-export { register,loginUser,getUserData,updateUserData};
+export { register,loginUser,getUserData,updateUserData,DeleteAllData};

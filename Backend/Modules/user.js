@@ -1,4 +1,4 @@
-import db, {  userCollection} from "../DB.js";
+import db, {  userCollection,appointmentsCollection} from "../DB.js";
 import crypto from "crypto";
 
 
@@ -56,9 +56,20 @@ class User {
         let array1 = [];
         let array2 = [];
         let result = {};
-        
+
+        // Check if a user with the same number already exists
+        const existingUser = await db.collection(userCollection).findOne({ number: userData.number });
+        if (existingUser) {
+            return {
+                success: false,
+                message: "User with this number already exists"
+            };
+        }
+
+        // Generate unique ID
         let uniqueId = await generateUniqueId("HE", userCollection);
 
+        // Process userData to encrypt values
         Object.keys(userData).forEach(key => {
             const value = userData[key];
             const ciphertext = encryptData(value);
@@ -70,6 +81,7 @@ class User {
             }
         });
 
+        // Combine arrays into a result object
         for (let i = 0; i < array1.length; i++) {
             result[array1[i]] = array2[i];
         }
@@ -77,12 +89,14 @@ class User {
         console.log(uniqueId);
         console.log(result);
 
+        // Insert user into the database
         let response = await db.collection(userCollection).insertOne({ _id: uniqueId, ...result });
-        // Check if the insertion was successful
+
+        // Check if insertion was successful
         if (response.acknowledged) {
             return {
                 success: true,
-                message: "User registered successfully"
+                message: `Generated MRN : ${uniqueId}`
             };
         } else {
             return {
@@ -179,6 +193,7 @@ async loginUser(userData) {
   }
 }
 
+
 async getUserDataDetails(id) {
   try {
     let response = await db.collection(userCollection).findOne({ _id: id });
@@ -246,6 +261,53 @@ async getUserDataDetails(id) {
   }
 }
 
+async  DeleteAllDataDetails(userData) {
+  const client = db.client; // Assuming 'db' is your database connection
+  const session = client.startSession();
+
+  try {
+    console.log("Received User Data for Deletion:", userData);
+
+    session.startTransaction();
+
+    // Define the filter criteria to find the documents to delete
+    const filter = { mrn: userData.mrn };
+    const filterUser = { _id: userData.mrn };
+
+    // Perform the delete operations within the transaction
+    const appointmentResult = await db.collection(appointmentsCollection).deleteMany(filter, { session });
+    const userResult = await db.collection(userCollection).deleteMany(filterUser, { session });
+
+    // Commit the transaction
+    await session.commitTransaction();
+
+    // Check the response to confirm the deletions
+    if (appointmentResult.deletedCount > 0 || userResult.deletedCount > 0) {
+      return {
+        success: true,
+        message: "User and appointment data deleted successfully.",
+        appointmentsDeleted: appointmentResult.deletedCount,
+        usersDeleted: userResult.deletedCount
+      };
+    } else {
+      return {
+        success: false,
+        message: "No matching data found to delete.",
+      };
+    }
+  } catch (error) {
+    // If an error occurs, abort the transaction
+    await session.abortTransaction();
+    console.error("Error deleting user and appointment data:", error);
+    return {
+      success: false,
+      message: "An error occurred while deleting the data.",
+    };
+  } finally {
+    // End the session
+    session.endSession();
+  }
+}
 	
 }
 

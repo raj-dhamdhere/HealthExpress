@@ -4,8 +4,81 @@ import NavbarComponent from "./DashboardNavbar.js";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useState, useEffect } from "react";
+const API_URL = "http://localhost:3001";
 
 const Dashboard = () => {
+  const [storedUser, setStoredUser] = useState(null);
+  const [mrn, setmrn] = useState();
+
+  useEffect(() => {
+    const storedUserdata = sessionStorage.getItem("user");
+    if (storedUserdata) {
+      const data = JSON.parse(storedUserdata);
+      setStoredUser(data);
+      // Set mrn if it exists
+      if (data.id) {
+        setmrn(data.id);
+      } else {
+        console.error("ID is not available in stored user data.");
+      }
+    }
+  }, []); // Empty dependency array to run only on mount
+
+
+  const onDelete = async () => {
+      // Display confirmation popup for deletion
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Do you really want to delete this appointment?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, keep it",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteData();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // User canceled deletion
+          Swal.fire("Cancelled", "Your appointment is safe.", "info");
+        }
+      });
+    
+  };
+
+  const deleteData = async () => {
+    // delete logic
+
+    const response = await axios.post(`${API_URL}/api/DeleteAllData`, {
+      mrn: mrn
+    });
+
+    console.log(response);
+
+    if (response.data.success) {
+      Swal.fire({
+        icon: "success",
+        title: "Deleted Account Successfully!",
+        text: response.data.message,
+        confirmButtonText: "OK",
+      }).then(() => {
+        sessionStorage.removeItem("user"); // Clear user session on logout
+        window.open("/login", "_self");
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Delete Failed",
+        text: response.data.message,
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
+
+
   return (
     <Container fluid>
       <Row>
@@ -20,6 +93,7 @@ const Dashboard = () => {
             <Row className="g-4">
               {" "}
               {/* Use g-4 for spacing between cards */}
+              <Col md={2}></Col>
               <Col md={4}>
                 {" "}
                 {/* Each card takes up 4 columns (1/3 of row) */}
@@ -27,6 +101,7 @@ const Dashboard = () => {
                   <Card.Img
                     variant="top"
                     src="assets/img/portfolio/doctorsdemographic.jpg"
+                    height="250px"
                   />
                   <Card.Body>
                     <Card.Title>Demographic Details</Card.Title>
@@ -50,6 +125,7 @@ const Dashboard = () => {
                   <Card.Img
                     variant="top"
                     src="assets/img/portfolio/doctorsscheduleappointment.jpg"
+                    height="250px"
                   />
                   <Card.Body>
                     <Card.Title>Schedule Appointment</Card.Title>
@@ -68,11 +144,15 @@ const Dashboard = () => {
                   </Card.Body>
                 </Card>
               </Col>
+            </Row>
+            <Row className="g-4" style={{ paddingTop: "15px" }}>
+              <Col md={2}></Col>
               <Col md={4}>
                 <Card style={{ width: "100%" }}>
                   <Card.Img
                     variant="top"
                     src="assets/img/portfolio/doctorssummary.jpg"
+                    height="250px"
                   />
                   <Card.Body>
                     <Card.Title>Summary</Card.Title>
@@ -87,6 +167,30 @@ const Dashboard = () => {
                       }}
                     >
                       Summary Details
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={4}>
+                <Card style={{ width: "100%" }}>
+                  <Card.Img
+                    variant="top"
+                    src="assets/img/portfolio/doctorno.jpg"
+                    height="250px"
+                  />
+                  <Card.Body>
+                    <Card.Title>Delete All Data</Card.Title>
+                    <Card.Text>
+                      This will Delete all the User Data,Demographic Details,
+                      Appointments Scheduled via Health Express
+                    </Card.Text>
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        onDelete();
+                      }}
+                    >
+                      Delete Account
                     </Button>
                   </Card.Body>
                 </Card>

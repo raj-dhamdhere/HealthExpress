@@ -110,7 +110,7 @@ const Sidebar = () => {
               onClick={() => handleNavigation("/appointmentscheduling")}
               icon={<ContactsOutlinedIcon />}
             >
-              <Typography>Appointment Lists</Typography>
+              <Typography>Book an Appointment</Typography>
             </MenuItem>
             <MenuItem
               active={selected === "Summary"}

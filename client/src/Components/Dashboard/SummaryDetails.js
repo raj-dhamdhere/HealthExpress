@@ -33,37 +33,51 @@ export default function Summary() {
 
   const getUserData = async () => {
     try {
-      let response = await axios.post(`${API_URL}/api/getUserData`, { id: mrn });
+      let response = await axios.post(`${API_URL}/api/getAppointmentSummary`, { mrn: mrn });
       console.log("Response data:", response.data.data);
-
+  
       if (response.data && response.data.data) {
-        setUserData([response.data.data]); // Wrap data in array for DataGrid
+        // Extract the array of appointments
+        const userAppointments = response.data.data;
+  
+        // Map over the appointments to ensure each one has a unique id
+        const dataWithIds = userAppointments.map((appointment) => ({
+          ...appointment,
+          id: appointment._id, // Set _id as the unique id for each row
+        }));
+  
+        // Set the data with ids to the state
+        setUserData(dataWithIds);
         setLoading(false);
       } else {
         console.error("User data is not available in the response.");
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
       setLoading(false);
     }
   };
+  
 
   const columns = [
-    { field: "fname", headerName: "First Name", width: 150 },
-    { field: "lname", headerName: "Last Name", width: 150 },
-    { field: "number", headerName: "Number", width: 150 },
-    { field: "email", headerName: "Email", width: 200 },
-    { field: "county", headerName: "County", width: 120 },
-    { field: "pincode", headerName: "Pincode", width: 120 },
-    { field: "pps", headerName: "PPS", width: 150 },
-    { field: "address", headerName: "Address", width: 250 },
-    { field: "insurancenumber", headerName: "Insurance Number", width: 200 },
+    { field: "mrn", headerName: "MRN", width: 100 },
+    { field: "appointmentNumber", headerName: "Appointment Number", width: 170 },
+    { field: "appointmentDate", headerName: "Appointment Date", width: 150 },
+    { field: "doctorContent", headerName: "Doctor Name", width: 200 },
+    { field: "appointmentSlotContent", headerName: "Appointment Slot", width: 200 },
+    { field: "refferedby", headerName: "Refferedby", width: 120 },
+    { field: "symptoms", headerName: "Symptoms", width: 150 },
+    { field: "allergies", headerName: "Allergies", width: 120 },
+    { field: "reasonforA", headerName: "Reason for Appointment", width: 250 }
   ];
 
   return (
     <React.Fragment>
+      <div style={{paddingTop:"20px"}}>
+
       <Typography variant="h4" gutterBottom>
-        Summary
+      <h4>Appointment Summary</h4>
       </Typography>
       <Box className="dataGridContainer"> {/* Apply the custom class here */}
         {loading ? (
@@ -83,6 +97,7 @@ export default function Summary() {
           />
         )}
       </Box>
+      </div>
     </React.Fragment>
   );
 }

@@ -6,6 +6,7 @@ import axios from "axios";
 import { TextField,Checkbox } from "@mui/material";
 import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import Swal from "sweetalert2";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 const API_URL = "http://localhost:3001";
 
@@ -144,13 +145,26 @@ const Register = () => {
       });
 
       console.log(response);
-      if (response.data.success == true) {
-        alert("Record Updated Successfully");
-        getUserData();
-        setdisabledstate(true);
+      
+      if (response.data.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Data Updated SuccessFully!",
+          text: response.data.message,
+          confirmButtonText: "OK",
+        }).then(() => {
+          getUserData();
+          setdisabledstate(true);
+        });
       } else {
-        alert("Record Saving Failed");
+        Swal.fire({
+          icon: "error",
+          title: "Data Updation Failed",
+          text: response.data.message,
+          confirmButtonText: "OK",
+        });
       }
+
     }
   };
 
@@ -251,6 +265,8 @@ const Register = () => {
                   </div>
                 </div>
               </div>
+              <div className="border-wrapper">
+
               <div className="php-email-form mt-4">
                 <div className="row">
                   <div className="col-md-6 form-group">
@@ -483,6 +499,7 @@ const Register = () => {
                     Save
                   </Button>
                 </div>
+              </div>
               </div>
             </div>
           </div>

@@ -16,9 +16,16 @@ const DB = connection.db("HealthExpress");
 
 const userCollection = "User";
 
+const doctorCollection = "Doctors";
 
+const appointmentslotCollection = "AppointmentSlots";
+
+const appointmentsCollection = "Appointment";
 export default DB;
 export {
 	ObjectId,
-	userCollection
+	userCollection,
+	doctorCollection,
+	appointmentslotCollection,
+	appointmentsCollection
 };

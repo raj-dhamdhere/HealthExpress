@@ -1,6 +1,7 @@
 import React from "react";
 import SidebarComponent from "../Sidebar.js";
 import NavbarComponent from "./DashboardNavbar.js";
+import AppointmentSchedular from "./AppointmentSchedular.js"
 import { Container, Row, Col } from "react-bootstrap"; // Import Bootstrap components
 
 const AppointmentSchedulingPage = () => {
@@ -12,7 +13,7 @@ const AppointmentSchedulingPage = () => {
         </Col>
         <Col md={10}>
           <NavbarComponent />
-          
+          <AppointmentSchedular/>
         </Col>
       </Row>
     </Container>

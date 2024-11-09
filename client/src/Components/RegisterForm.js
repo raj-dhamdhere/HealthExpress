@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 const API_URL = "http://localhost:3001";
 
 const Register = () => {
@@ -54,18 +55,30 @@ const Register = () => {
       });
 
       console.log(response);
-      if (response.data.success === true) {
-        alert("Record Saved Successfully");
-        setfname("");
-        setlname("");
-        setnumber("");
-        setpassword("");
-        setemail("");
-        setcounty("");
-        setaddress("");
+      if (response.data.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Registered SuccessFully!",
+          text: response.data.message,
+          confirmButtonText: "OK",
+        }).then(() => {
+          setfname("");
+          setlname("");
+          setnumber("");
+          setpassword("");
+          setemail("");
+          setcounty("");
+          setaddress("");
+        });
       } else {
-        alert("Record Saving Failed");
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: response.data.message,
+          confirmButtonText: "OK",
+        });
       }
+
     }
   };
 

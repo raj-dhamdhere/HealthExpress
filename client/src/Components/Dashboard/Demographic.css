@@ -1,0 +1,6 @@
+.border-wrapper {
+    border: 2px solid lightblue; /* Adjust thickness and color as needed */
+    border-radius: 8px; /* Optional: adds rounded corners */
+    padding: 15px; /* Optional: adds some padding inside the border */
+    background-color: #f9f9f9; /* Optional: adds a light background color */
+}

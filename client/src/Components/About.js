@@ -18,7 +18,7 @@ const About = () => {
                         <div className="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
                             <h3>Health Express</h3>
                             <p className="fst-italic">
-                                Health Express Pvt Ltd is a Top Notch health institute which enables users to have remote registration and Flexible Appointment Schedule rather than standing in a Long Queue.
+                                Health Express Pvt Ltd is a Top Notch Health Institute which enables users to have remote registration and Flexible Appointment Schedule rather than standing in a Long Queue.
                             </p>
                             <ul>
                                 <li><i className="ri-check-double-line"></i> Our goal is to be “flawless” in the eyes of our customers.</li>

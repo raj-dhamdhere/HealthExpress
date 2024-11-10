@@ -10,6 +10,7 @@ COPY Backend/package*.json ./Backend/
 # Step 4: Install backend dependencies
 RUN npm install
 
+RUN npm install -g nodemon
 # Step 5: Copy all the backend application files into the container
 COPY Backend/ .
 
@@ -17,4 +18,4 @@ COPY Backend/ .
 EXPOSE 3000
 
 # Step 7: Define the command to run the backend
-CMD ["npm", "start"]
+CMD ["nodemon", "index.js"]

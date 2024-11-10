@@ -35,7 +35,7 @@ pipeline {
 
                 dir('client') {
                     echo 'Installing frontend dependencies...'
-                    sh 'npm install --force'  // Reduced verbosity
+                    sh 'npm install --legacy-peer-deps'  // Reduced verbosity
                 }
             }
         }

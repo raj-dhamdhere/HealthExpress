@@ -26,6 +26,17 @@ pipeline {
             }
         }
 
+        stage('Clean client Workspace') {
+            steps {
+                // Remove node_modules and package-lock.json if they exist
+                dir('client') {
+                    sh 'rm -rf node_modules'
+                    sh 'rm -f package-lock.json'
+                }
+
+            }
+        }
+        
         stage('Install Dependencies') {
             steps {
                 dir('Backend') {
@@ -35,6 +46,7 @@ pipeline {
 
                 dir('client') {
                     echo 'Installing frontend dependencies...'
+                    
                     sh 'npm install --legacy-peer-deps'  // Reduced verbosity
                 }
             }

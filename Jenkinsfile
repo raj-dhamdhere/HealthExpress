@@ -6,9 +6,6 @@ pipeline {
         PATH = "${NODE_HOME}:${env.PATH}"
     }
 
-    options {
-        cleanWs() // Clears workspace to avoid using stale files
-    }
 
     stages {
         stage('Clone Repository') {

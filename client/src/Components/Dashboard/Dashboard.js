@@ -101,7 +101,7 @@ const Dashboard = () => {
                   <Card.Img
                     variant="top"
                     src="assets/img/portfolio/doctorsdemographic.jpg"
-                    height="250px"
+                    height="280px"
                   />
                   <Card.Body>
                     <Card.Title>Demographic Details</Card.Title>
@@ -125,7 +125,7 @@ const Dashboard = () => {
                   <Card.Img
                     variant="top"
                     src="assets/img/portfolio/doctorsscheduleappointment.jpg"
-                    height="250px"
+                    height="280px"
                   />
                   <Card.Body>
                     <Card.Title>Schedule Appointment</Card.Title>
@@ -152,7 +152,7 @@ const Dashboard = () => {
                   <Card.Img
                     variant="top"
                     src="assets/img/portfolio/doctorssummary.jpg"
-                    height="250px"
+                    height="280px"
                   />
                   <Card.Body>
                     <Card.Title>Summary</Card.Title>
@@ -176,7 +176,7 @@ const Dashboard = () => {
                   <Card.Img
                     variant="top"
                     src="assets/img/portfolio/doctorno.jpg"
-                    height="250px"
+                    height="280px"
                   />
                   <Card.Body>
                     <Card.Title>Delete All Data</Card.Title>

@@ -7,7 +7,7 @@ pipeline {
     }
 
     options {
-        timeout(time: 30, unit: 'MINUTES')  // Sets a maximum time for the entire pipeline
+        timeout(time: 45, unit: 'MINUTES')  // Sets a maximum time for the entire pipeline
     }
 
     stages {

@@ -2,55 +2,76 @@ pipeline {
     agent any
 
     environment {
-        NODE_HOME = '/usr/local/bin/' // Update if your Node.js path is different
+        NODE_HOME = '/usr/local/bin/'
         PATH = "${NODE_HOME}:${env.PATH}"
+    }
+
+    options {
+        timeout(time: 45, unit: 'MINUTES')  // Sets a maximum time for the entire pipeline
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/raj-dhamdhere/HealthExpress.git'
+                git branch: 'main', url: 'https://github.com/raj-dhamdhere/HealthExpress.git', credentialsId: 'github-token'
+            }
+        }
+
+        stage('Verify Backend Directory') {
+            steps {
+                dir('Backend') {
+                    echo 'Checking contents of backend directory...'
+                    sh 'ls -la'
+                }
+            }
+        }
+
+        stage('Clean client Workspace') {
+            steps {
+                // Remove node_modules and package-lock.json if they exist
+                dir('client') {
+                    sh 'rm -rf node_modules'
+                    sh 'rm -f package-lock.json'
+                }
+
             }
         }
         
         stage('Install Dependencies') {
             steps {
-                // Install backend dependencies
-                dir('backend') {
+                dir('Backend') {
                     echo 'Installing backend dependencies...'
-                    sh 'npm install'
+                    sh 'npm install --quiet'  // Reduced verbosity
                 }
-                // Install frontend dependencies
-                dir('frontend') {
+
+                dir('client') {
                     echo 'Installing frontend dependencies...'
-                    sh 'npm install'
+                    
+                    sh 'npm install --force'  // Reduced verbosity
                 }
             }
         }
 
-
         stage('Build') {
             steps {
-                // Build frontend project
-                dir('frontend') {
+                dir('client') {
                     echo 'Building frontend...'
-                    sh 'npm run build'
+                    timeout(time: 15, unit: 'MINUTES') {  // Adds a timeout to the build step
+                        sh 'npm run build --quiet'  // Reduced verbosity
+                    }
                 }
-
             }
         }
 
         stage('Deploy') {
             steps {
-                // Deploy backend
-                dir('backend') {
-                    echo 'Deploying backend...'
-                    sh 'nodemon index.js || node index.js --name "app-backend"'
+                dir('Backend') {
+                    echo 'Starting backend server with pm2...'
+                    sh 'pm2 start index.js --name "app-backend" || node index.js'
                 }
-                // Deploy frontend if it's on a separate server (optional)
-                dir('frontend') {
-                    echo 'Deploying frontend...'
-                    sh 'npm start --name "app-frontend"'
+                dir('client') {
+                    echo 'Starting frontend application with pm2...'
+                    sh 'npm start'
                 }
             }
         }

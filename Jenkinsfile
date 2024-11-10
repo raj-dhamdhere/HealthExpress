@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NODE_HOME = '/usr/local/bin/' // Update if your Node.js path is different
+        NODE_HOME = '/usr/local/bin/' // Update this if your Node.js path is different
         PATH = "${NODE_HOME}:${env.PATH}"
     }
 
@@ -12,7 +12,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/raj-dhamdhere/HealthExpress.git'
             }
         }
-        
+
         stage('Install Dependencies') {
             steps {
                 // Install backend dependencies
@@ -28,7 +28,6 @@ pipeline {
             }
         }
 
-
         stage('Build') {
             steps {
                 // Build frontend project
@@ -36,21 +35,20 @@ pipeline {
                     echo 'Building frontend...'
                     sh 'npm run build'
                 }
-
             }
         }
 
         stage('Deploy') {
             steps {
-                // Deploy backend
+                // Deploy backend with pm2
                 dir('backend') {
-                    echo 'Deploying backend...'
-                    sh 'nodemon index.js || node index.js --name "app-backend"'
+                    echo 'Starting backend server with pm2...'
+                    sh 'pm2 start index.js --name "app-backend" || node index.js' 
                 }
-                // Deploy frontend if it's on a separate server (optional)
+                // Deploy frontend with pm2
                 dir('frontend') {
-                    echo 'Deploying frontend...'
-                    sh 'npm start --name "app-frontend"'
+                    echo 'Starting frontend application with pm2...'
+                    sh 'npm start'
                 }
             }
         }

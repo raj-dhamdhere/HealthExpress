@@ -11,7 +11,7 @@ export default function NavbarComponent() {
           backgroundColor: "#F2F0F0",
           borderBottom: "2px solid #d1d1d1", // Border at the bottom
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Soft shadow for depth
-          padding: "4px 20px", // Reduced padding for smaller height
+          padding: "5px 20px", // Reduced padding for smaller height
         }}
         expand="lg"
       >
@@ -20,7 +20,7 @@ export default function NavbarComponent() {
           style={{
             color: "black",
             fontWeight: "bold", // Making the brand name bold
-            fontSize: "1.2rem", // Slightly smaller font size for brand name
+            fontSize: "1.3rem", // Slightly smaller font size for brand name
           }}
         >
           Health<span style={{ color: "#FF6347" }}>Express</span>
@@ -31,16 +31,16 @@ export default function NavbarComponent() {
 
           {/* Right aligned nav links */}
           <Nav className="ml-auto">
-            <Nav.Link href="/" style={{ color: "black", fontSize: "0.9rem" }}>
+            <Nav.Link href="/" style={{ color: "black", fontSize: "1.0rem" }}>
               Home
             </Nav.Link>
-            <Nav.Link href="/about" style={{ color: "black", fontSize: "0.9rem" }}>
+            <Nav.Link href="/about" style={{ color: "black", fontSize: "1.0rem" }}>
               About Us
             </Nav.Link>
-            <Nav.Link href="/register" style={{ color: "black", fontSize: "0.9rem" }}>
+            <Nav.Link href="/register" style={{ color: "black", fontSize: "1.0rem" }}>
               Register
             </Nav.Link>
-            <Nav.Link href="/login" style={{ color: "black", fontSize: "0.9rem" }}>
+            <Nav.Link href="/login" style={{ color: "black", fontSize: "1.0rem" }}>
               Login
             </Nav.Link>
           </Nav>

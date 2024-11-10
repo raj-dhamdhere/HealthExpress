@@ -100,7 +100,7 @@ const Register = () => {
               <div className="php-email-form mt-4" style={styles.formContainer}>
                 <div className="row">
                   <div className="col-md-6 form-group">
-                    <Form.Label>First Name</Form.Label>
+                    <Form.Label style={{fontWeight:"bold"}}>First Name</Form.Label>
                     <input
                       type="text"
                       name="fname"
@@ -115,7 +115,7 @@ const Register = () => {
                   </div>
 
                   <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>Last Name</Form.Label>
+                    <Form.Label style={{fontWeight:"bold"}}>Last Name</Form.Label>
                     <input
                       type="text"
                       className="form-control"
@@ -132,7 +132,7 @@ const Register = () => {
 
                 <div className="row">
                   <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>Mobile Number</Form.Label>
+                    <Form.Label style={{fontWeight:"bold"}}>Mobile Number</Form.Label>
                     <input
                       type="number"
                       className="form-control"
@@ -146,7 +146,7 @@ const Register = () => {
                   </div>
 
                   <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label style={{fontWeight:"bold"}}>Password</Form.Label>
                     <input
                       type="password"
                       className="form-control"
@@ -163,7 +163,7 @@ const Register = () => {
 
                 <div className="row">
                   <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label style={{fontWeight:"bold"}}>Email</Form.Label>
                     <input
                       type="email"
                       className="form-control"
@@ -178,7 +178,7 @@ const Register = () => {
                   </div>
 
                   <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>County</Form.Label>
+                    <Form.Label style={{fontWeight:"bold"}}>County</Form.Label>
                     <input
                       type="text"
                       className="form-control"
@@ -194,7 +194,7 @@ const Register = () => {
                 </div>
 
                 <div className="form-group mt-3 mt-md-0">
-                  <Form.Label>Address</Form.Label>
+                  <Form.Label style={{fontWeight:"bold"}}>Address</Form.Label>
                   <input
                     type="text"
                     className="form-control"

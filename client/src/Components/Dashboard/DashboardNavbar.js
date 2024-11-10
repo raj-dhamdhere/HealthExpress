@@ -60,14 +60,14 @@ export default function NavbarComponent() {
                 boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Shadow for the box
               }}
             >
-              <PeopleOutlinedIcon style={{ color: "black", marginRight: "8px", fontSize: "1.2rem" }} />
+              <PeopleOutlinedIcon style={{ color: "black", marginRight: "8px", fontSize: "1.3rem" }} />
               {/* Render stored user name if available */}
-              <span style={{ color: "black", marginRight: "10px", fontSize: "0.9rem" }}>
+              <span style={{ color: "black", marginRight: "10px", fontSize: "1.1rem" }}>
                 {storedUser ? storedUser.name || "User" : "Loading..."}
               </span>
 
               {/* Logout button */}
-              <Button variant="outline-danger" onClick={handleLogout} size="sm" style={{ fontSize: "0.8rem" }}>
+              <Button variant="outline-danger" onClick={handleLogout} size="sm" style={{ fontSize: "1.0rem" }}>
                 Logout
               </Button>
             </div>

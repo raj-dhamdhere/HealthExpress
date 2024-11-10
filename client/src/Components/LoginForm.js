@@ -169,7 +169,7 @@ const Login = () => {
             <div className="col-lg-8 aos-init aos-animate" data-aos="fade-left">
               <div className="php-email-form mt-4" style={styles.formContainer}>
                 <Form.Group style={{ marginBottom: "20px" }}>
-                  <Form.Label>Mobile Number</Form.Label>
+                  <Form.Label style={{fontWeight:"bold"}}>Mobile Number</Form.Label>
                   <input
                     type="number"
                     className="form-control"
@@ -182,7 +182,7 @@ const Login = () => {
                   />
                 </Form.Group>
                 <Form.Group style={{ marginBottom: "20px" }}>
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label style={{fontWeight:"bold"}}>Password</Form.Label>
                   <input
                     type="password"
                     className="form-control"

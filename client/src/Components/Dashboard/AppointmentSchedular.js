@@ -448,7 +448,7 @@ const Register = () => {
                       {/* Date Field */}
                       <div className="col-md-3 form-group">
                         <div>
-                          <Form.Label>Select Date</Form.Label>
+                          <Form.Label style={{fontWeight:"bold"}}>Select Date</Form.Label>
                         </div>
                         <div>
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -472,7 +472,7 @@ const Register = () => {
 
                       {/* Select Doctor Field */}
                       <div className="col-md-3 form-group">
-                        <Form.Label>Select Doctor</Form.Label>
+                        <Form.Label style={{fontWeight:"bold"}}>Select Doctor</Form.Label>
                         <select
                           disabled={disabledstateSearch}
                           className="form-control"
@@ -492,7 +492,7 @@ const Register = () => {
 
                       {/* Appointment Slots Field */}
                       <div className="col-md-3 form-group">
-                        <Form.Label>Appointment Slots</Form.Label>
+                        <Form.Label style={{fontWeight:"bold"}}>Appointment Slots</Form.Label>
                         <select
                           disabled={disabledstateSearch}
                           className="form-control"
@@ -536,7 +536,7 @@ const Register = () => {
                     <div className="row">
                       <div className="col-md-6 form-group">
                         <div>
-                          <Form.Label>Appointment Date</Form.Label>
+                          <Form.Label style={{fontWeight:"bold"}}>Appointment Date</Form.Label>
                         </div>
                         <div style={{ width: "100%" }}>
                           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -559,7 +559,7 @@ const Register = () => {
                       </div>
 
                       <div className="col-md-6 form-group mt-3 mt-md-0">
-                        <Form.Label>Select Doctor</Form.Label>
+                        <Form.Label style={{fontWeight:"bold"}}>Select Doctor</Form.Label>
                         <select
                           disabled={disabledstate}
                           className="form-control"
@@ -581,7 +581,7 @@ const Register = () => {
                     </div>
                     <div className="row">
                       <div className="col-md-6 form-group mt-3 mt-md-0">
-                        <Form.Label>Appointment Slots</Form.Label>
+                        <Form.Label style={{fontWeight:"bold"}}>Appointment Slots</Form.Label>
                         <select
                           disabled={disabledstate}
                           className="form-control"
@@ -602,7 +602,7 @@ const Register = () => {
                       </div>
 
                       <div className="col-md-6 form-group mt-3 mt-md-0">
-                        <Form.Label>Reffered By</Form.Label>
+                        <Form.Label style={{fontWeight:"bold"}}>Reffered By</Form.Label>
                         <input
                           disabled={disabledstate}
                           type="text"
@@ -621,7 +621,7 @@ const Register = () => {
 
                     <div className="row">
                       <div className="col-md-6 form-group mt-3 mt-md-0">
-                        <Form.Label>Symptoms</Form.Label>
+                        <Form.Label style={{fontWeight:"bold"}}>Symptoms</Form.Label>
                         <input
                           disabled={disabledstate}
                           type="text"
@@ -638,7 +638,7 @@ const Register = () => {
                       </div>
 
                       <div className="col-md-6 form-group mt-3 mt-md-0">
-                        <Form.Label>Allergies</Form.Label>
+                        <Form.Label style={{fontWeight:"bold"}}>Allergies</Form.Label>
                         <input
                           disabled={disabledstate}
                           type="text"
@@ -656,7 +656,7 @@ const Register = () => {
                     </div>
 
                     <div className=" form-group mt-3 mt-md-0">
-                      <Form.Label>Reason for Appointment </Form.Label>
+                      <Form.Label style={{fontWeight:"bold"}}>Reason for Appointment </Form.Label>
                       <input
                         disabled={disabledstate}
                         type="text"

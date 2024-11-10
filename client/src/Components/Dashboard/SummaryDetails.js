@@ -62,7 +62,7 @@ export default function Summary() {
 
   const columns = [
     { field: "mrn", headerName: "MRN", width: 100 },
-    { field: "appointmentNumber", headerName: "Appointment Number", width: 170 },
+    { field: "appointmentNumber", headerName: "Appointment No", width: 170 },
     { field: "appointmentDate", headerName: "Appointment Date", width: 150 },
     { field: "doctorContent", headerName: "Doctor Name", width: 200 },
     { field: "appointmentSlotContent", headerName: "Appointment Slot", width: 200 },
@@ -74,29 +74,47 @@ export default function Summary() {
 
   return (
     <React.Fragment>
-      <div style={{paddingTop:"20px"}}>
-
-      <Typography variant="h4" gutterBottom>
-      <h4>Appointment Summary</h4>
-      </Typography>
-      <Box className="dataGridContainer"> {/* Apply the custom class here */}
-        {loading ? (
-          <Box display="flex" justifyContent="center" alignItems="center" height="100%">
-            <CircularProgress />
-          </Box>
-        ) : (
-          <DataGrid
-            rows={userData}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5, 10, 20]}
-            checkboxSelection
-            components={{
-              Toolbar: GridToolbar,
+      <div style={{ paddingTop: "20px" }}>
+        <Typography variant="h4" gutterBottom style={{textAlign:"center"}}>
+          <h4
+            style={{
+              fontWeight: "bold", // Make the text bold
+              textAlign: "center", // Center the heading
+              marginBottom: "20px", // Add spacing below
+              borderBottom: "2px solid #1976d2", // Bottom border for separation
+              paddingBottom: "10px", // Padding below the text
+              display: "inline-block", // Shrinks to fit the content
             }}
-          />
-        )}
-      </Box>
+          >
+            Appointment Summary
+          </h4>
+        </Typography>
+
+        <Box className="dataGridContainer">
+          {" "}
+          {/* Apply the custom class here */}
+          {loading ? (
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              height="100%"
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            <DataGrid
+              rows={userData}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5, 10, 20]}
+              checkboxSelection
+              components={{
+                Toolbar: GridToolbar,
+              }}
+            />
+          )}
+        </Box>
       </div>
     </React.Fragment>
   );

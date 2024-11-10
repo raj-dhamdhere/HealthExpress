@@ -412,7 +412,18 @@ const Register = () => {
               >
                 <div className="row">
                   <div className="col-md-8">
-                    <h4>Appointment Scheduling</h4>
+                  <h4
+                      style={{
+                        fontWeight: "bold", // Make the text bold
+                        textAlign: "center", // Center the heading
+                        marginBottom: "2px", // Add spacing below
+                        borderBottom: "2px solid #1976d2", // Bottom border for separation
+                        paddingBottom: "10px", // Padding below the text
+                        display: "inline-block", // Shrinks to fit the content
+                      }}
+                    >
+                      Appointment Scheduling
+                    </h4>
                   </div>
 
                   <div className="col-md-4">

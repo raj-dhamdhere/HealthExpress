@@ -24,9 +24,24 @@ export default function NavbarComponent() {
 
   return (
     <>
-      <Navbar style={{ backgroundColor: "#F2F0F0", color: "white" }} expand="lg">
-        <Navbar.Brand href="/dashboard" style={{ color: "black" }}>
-          HealthExpress
+      <Navbar
+        style={{
+          backgroundColor: "#F2F0F0",
+          borderBottom: "2px solid #d1d1d1", // Border at the bottom
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Soft shadow for depth
+          padding: "4px 20px", // Reduced padding for smaller height
+        }}
+        expand="lg"
+      >
+        <Navbar.Brand
+          href="/dashboard"
+          style={{
+            color: "black",
+            fontWeight: "bold", // Making the brand name bold
+            fontSize: "1.2rem", // Slightly smaller font size for brand name
+          }}
+        >
+          Health<span style={{ color: "#FF6347" }}>Express</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
@@ -34,16 +49,28 @@ export default function NavbarComponent() {
 
           {/* Right aligned user info and logout */}
           <Nav className="align-items-center">
-            <PeopleOutlinedIcon style={{ color: "black", marginRight: "8px" }} />
-            {/* Render stored user name if available */}
-            <span style={{ color: "black", marginRight: "15px" }}>
-              {storedUser ? storedUser.name || "User" : "Loading..."}
-            </span>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                border: "1px solid #d1d1d1", // Square border around user info
+                borderRadius: "5px", // Small rounding for a slightly softened square
+                padding: "6px 15px", // Reduced padding for a more compact user info box
+                backgroundColor: "#FFFFFF",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Shadow for the box
+              }}
+            >
+              <PeopleOutlinedIcon style={{ color: "black", marginRight: "8px", fontSize: "1.2rem" }} />
+              {/* Render stored user name if available */}
+              <span style={{ color: "black", marginRight: "10px", fontSize: "0.9rem" }}>
+                {storedUser ? storedUser.name || "User" : "Loading..."}
+              </span>
 
-            {/* Logout button */}
-            <Button variant="outline-danger" onClick={handleLogout}>
-              Logout
-            </Button>
+              {/* Logout button */}
+              <Button variant="outline-danger" onClick={handleLogout} size="sm" style={{ fontSize: "0.8rem" }}>
+                Logout
+              </Button>
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

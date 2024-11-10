@@ -247,7 +247,18 @@ const Register = () => {
               >
                 <div className="row">
                   <div className="col-md-8">
-                    <h4>Demographic Details</h4>
+                    <h4
+                      style={{
+                        fontWeight: "bold", // Make the text bold
+                        textAlign: "center", // Center the heading
+                        marginBottom: "20px", // Add spacing below
+                        borderBottom: "2px solid #1976d2", // Bottom border for separation
+                        paddingBottom: "10px", // Padding below the text
+                        display: "inline-block", // Shrinks to fit the content
+                      }}
+                    >
+                      Demographic Details
+                    </h4>
                   </div>
 
                   <div className="col-md-4">
@@ -266,182 +277,181 @@ const Register = () => {
                 </div>
               </div>
               <div className="border-wrapper">
-
-              <div className="php-email-form mt-4">
-                <div className="row">
-                  <div className="col-md-6 form-group">
-                    <Form.Label>First Name</Form.Label>
-                    <input
-                      disabled={disabledstate}
-                      type="text"
-                      name="fname"
-                      className="form-control"
-                      id="fname"
-                      placeholder="Your Name"
-                      value={fname}
-                      onChange={(e) => {
-                        setfname(e.target.value);
-                      }}
-                      required=""
-                    />
-                  </div>
-
-                  <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>Last Name</Form.Label>
-                    <input
-                      disabled={disabledstate}
-                      type="text"
-                      className="form-control"
-                      name="lname"
-                      id="lname"
-                      placeholder="Your Last Name"
-                      value={lname}
-                      onChange={(e) => {
-                        setlname(e.target.value);
-                      }}
-                      required=""
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>Mobile Number</Form.Label>
-                    <input
-                      disabled={disabledstate}
-                      type="number"
-                      className="form-control"
-                      name="number"
-                      placeholder="Your number"
-                      value={number}
-                      onChange={(e) => {
-                        setnumber(e.target.value);
-                      }}
-                      required=""
-                    />
-                  </div>
-
-                  <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>Email</Form.Label>
-                    <input
-                      disabled={disabledstate}
-                      type="email"
-                      className="form-control"
-                      name="email"
-                      id="email"
-                      placeholder="Your email"
-                      value={email}
-                      onChange={(e) => {
-                        setemail(e.target.value);
-                      }}
-                      required=""
-                    />
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>County</Form.Label>
-                    <input
-                      disabled={disabledstate}
-                      type="text"
-                      className="form-control"
-                      name="county"
-                      id="county"
-                      placeholder="Your County"
-                      value={county}
-                      onChange={(e) => {
-                        setcounty(e.target.value);
-                      }}
-                      required=""
-                    />
-                  </div>
-
-                  <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>EIR Code</Form.Label>
-                    <input
-                      disabled={disabledstate}
-                      type="text"
-                      className="form-control"
-                      name="pincode"
-                      id="pincode"
-                      placeholder="Your EIR Code"
-                      value={pincode}
-                      onChange={(e) => {
-                        setpincode(e.target.value);
-                      }}
-                      required=""
-                    />
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <div>
-                      <Form.Label>DOB</Form.Label>
+                <div className="php-email-form mt-4">
+                  <div className="row">
+                    <div className="col-md-6 form-group">
+                      <Form.Label>First Name</Form.Label>
+                      <input
+                        disabled={disabledstate}
+                        type="text"
+                        name="fname"
+                        className="form-control"
+                        id="fname"
+                        placeholder="Your Name"
+                        value={fname}
+                        onChange={(e) => {
+                          setfname(e.target.value);
+                        }}
+                        required=""
+                      />
                     </div>
-                    <div>
-                      <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DateTimePicker
-                          disabled={disabledstate}
-                          value={selectedDate}
-                          onChange={handleDateChange}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              fullWidth
-                              variant="outlined"
-                              style={{
-                                height: "56px", // Match height of other input fields
-                              }}
-                            />
-                          )}
-                        />
-                      </LocalizationProvider>
+
+                    <div className="col-md-6 form-group mt-3 mt-md-0">
+                      <Form.Label>Last Name</Form.Label>
+                      <input
+                        disabled={disabledstate}
+                        type="text"
+                        className="form-control"
+                        name="lname"
+                        id="lname"
+                        placeholder="Your Last Name"
+                        value={lname}
+                        onChange={(e) => {
+                          setlname(e.target.value);
+                        }}
+                        required=""
+                      />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6 form-group mt-3 mt-md-0">
+                      <Form.Label>Mobile Number</Form.Label>
+                      <input
+                        disabled={disabledstate}
+                        type="number"
+                        className="form-control"
+                        name="number"
+                        placeholder="Your number"
+                        value={number}
+                        onChange={(e) => {
+                          setnumber(e.target.value);
+                        }}
+                        required=""
+                      />
+                    </div>
+
+                    <div className="col-md-6 form-group mt-3 mt-md-0">
+                      <Form.Label>Email</Form.Label>
+                      <input
+                        disabled={disabledstate}
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        id="email"
+                        placeholder="Your email"
+                        value={email}
+                        onChange={(e) => {
+                          setemail(e.target.value);
+                        }}
+                        required=""
+                      />
                     </div>
                   </div>
 
-                  <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>PPS Number</Form.Label>
+                  <div className="row">
+                    <div className="col-md-6 form-group mt-3 mt-md-0">
+                      <Form.Label>County</Form.Label>
+                      <input
+                        disabled={disabledstate}
+                        type="text"
+                        className="form-control"
+                        name="county"
+                        id="county"
+                        placeholder="Your County"
+                        value={county}
+                        onChange={(e) => {
+                          setcounty(e.target.value);
+                        }}
+                        required=""
+                      />
+                    </div>
+
+                    <div className="col-md-6 form-group mt-3 mt-md-0">
+                      <Form.Label>EIR Code</Form.Label>
+                      <input
+                        disabled={disabledstate}
+                        type="text"
+                        className="form-control"
+                        name="pincode"
+                        id="pincode"
+                        placeholder="Your EIR Code"
+                        value={pincode}
+                        onChange={(e) => {
+                          setpincode(e.target.value);
+                        }}
+                        required=""
+                      />
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6 form-group mt-3 mt-md-0">
+                      <div>
+                        <Form.Label>DOB</Form.Label>
+                      </div>
+                      <div>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                          <DateTimePicker
+                            disabled={disabledstate}
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            renderInput={(params) => (
+                              <TextField
+                                {...params}
+                                fullWidth
+                                variant="outlined"
+                                style={{
+                                  height: "56px", // Match height of other input fields
+                                }}
+                              />
+                            )}
+                          />
+                        </LocalizationProvider>
+                      </div>
+                    </div>
+
+                    <div className="col-md-6 form-group mt-3 mt-md-0">
+                      <Form.Label>PPS Number</Form.Label>
+                      <input
+                        disabled={disabledstate}
+                        type="text"
+                        className="form-control"
+                        name="PPS"
+                        id="PPS"
+                        placeholder="Your PPS"
+                        value={pps}
+                        onChange={(e) => {
+                          setpps(e.target.value);
+                        }}
+                        required=""
+                      />
+                    </div>
+                  </div>
+
+                  <div className=" form-group mt-3 mt-md-0">
+                    <Form.Label>Address</Form.Label>
                     <input
                       disabled={disabledstate}
                       type="text"
                       className="form-control"
-                      name="PPS"
-                      id="PPS"
-                      placeholder="Your PPS"
-                      value={pps}
+                      name="address"
+                      id="address"
+                      placeholder="Address"
+                      value={address}
                       onChange={(e) => {
-                        setpps(e.target.value);
+                        setaddress(e.target.value);
                       }}
                       required=""
                     />
                   </div>
-                </div>
 
-                <div className=" form-group mt-3 mt-md-0">
-                  <Form.Label>Address</Form.Label>
-                  <input
-                    disabled={disabledstate}
-                    type="text"
-                    className="form-control"
-                    name="address"
-                    id="address"
-                    placeholder="Address"
-                    value={address}
-                    onChange={(e) => {
-                      setaddress(e.target.value);
-                    }}
-                    required=""
-                  />
-                </div>
-
-                <div className="row">
-                  <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <div>
-                      <Form.Label>Have Insurance</Form.Label>
-                    </div>
-                    <div>
-                      {/* <BootstrapSwitchButton
+                  <div className="row">
+                    <div className="col-md-6 form-group mt-3 mt-md-0">
+                      <div>
+                        <Form.Label>Have Insurance</Form.Label>
+                      </div>
+                      <div>
+                        {/* <BootstrapSwitchButton
                         disabled = {disabledstate}
                         checked={false}
                         onlabel="yes"
@@ -453,53 +463,53 @@ const Register = () => {
                           setToggleState(checked);
                         }}
                       /> */}
-                      <Checkbox
-                        disabled={disabledstate}
-                        checked={toggleState === "yes"}
-                        onChange={handleChangeCheckbox}
-                        color="primary" // You can customize the color
+                        <Checkbox
+                          disabled={disabledstate}
+                          checked={toggleState === "yes"}
+                          onChange={handleChangeCheckbox}
+                          color="primary" // You can customize the color
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-md-6 form-group mt-3 mt-md-0">
+                      <Form.Label>Insurance Number</Form.Label>
+                      <input
+                        disabled={disabledstate || toggleState === "no"}
+                        type="text"
+                        className="form-control"
+                        name="Insurance"
+                        id="Insurance"
+                        placeholder="Your Insurance Number"
+                        value={insnumber}
+                        onChange={(e) => {
+                          setinsnumber(e.target.value);
+                        }}
+                        required=""
                       />
                     </div>
                   </div>
 
-                  <div className="col-md-6 form-group mt-3 mt-md-0">
-                    <Form.Label>Insurance Number</Form.Label>
-                    <input
-                      disabled={disabledstate || (toggleState === "no")}
-                      type="text"
-                      className="form-control"
-                      name="Insurance"
-                      id="Insurance"
-                      placeholder="Your Insurance Number"
-                      value={insnumber}
-                      onChange={(e) => {
-                        setinsnumber(e.target.value);
+                  <div className="text-center" style={{ paddingTop: "10px" }}>
+                    <Button
+                      style={buttonStyle}
+                      onClick={() => {
+                        onEdit();
                       }}
-                      required=""
-                    />
+                    >
+                      Edit
+                    </Button>
+                    &nbsp; &nbsp; &nbsp;
+                    <Button
+                      style={buttonStyle}
+                      onClick={() => {
+                        onsubmit();
+                      }}
+                    >
+                      Save
+                    </Button>
                   </div>
                 </div>
-
-                <div className="text-center" style={{ paddingTop: "10px" }}>
-                  <Button
-                    style={buttonStyle}
-                    onClick={() => {
-                      onEdit();
-                    }}
-                  >
-                    Edit
-                  </Button>
-                  &nbsp; &nbsp; &nbsp;
-                  <Button
-                    style={buttonStyle}
-                    onClick={() => {
-                      onsubmit();
-                    }}
-                  >
-                    Save
-                  </Button>
-                </div>
-              </div>
               </div>
             </div>
           </div>

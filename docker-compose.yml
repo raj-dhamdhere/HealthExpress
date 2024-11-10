@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Backend/Dockerfile  # Dockerfile for the backend
+    ports:
+      - "3001:3000"  # Expose backend on port 3001
+    networks:
+      - healthexpress-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: client/Dockerfile  # Dockerfile for the frontend
+    ports:
+      - "3000:3000"  # Expose frontend on port 3000
+    depends_on:
+      - backend  # Ensure backend starts before frontend
+    networks:
+      - healthexpress-network
+
+networks:
+  healthexpress-network:
+    driver: bridge

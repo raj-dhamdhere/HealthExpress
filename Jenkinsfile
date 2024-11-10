@@ -28,18 +28,14 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                cache(path: './Backend/node_modules', key: 'npm-backend') {  // Cache backend dependencies
-                    dir('Backend') {
-                        echo 'Installing backend dependencies...'
-                        sh 'npm install --quiet'  // Reduced verbosity
-                    }
+                dir('Backend') {
+                    echo 'Installing backend dependencies...'
+                    sh 'npm install --quiet'  // Reduced verbosity
                 }
 
-                cache(path: './client/node_modules', key: 'npm-client') {  // Cache frontend dependencies
-                    dir('client') {
-                        echo 'Installing frontend dependencies...'
-                        sh 'npm install --quiet'  // Reduced verbosity
-                    }
+                dir('client') {
+                    echo 'Installing frontend dependencies...'
+                    sh 'npm install --quiet'  // Reduced verbosity
                 }
             }
         }

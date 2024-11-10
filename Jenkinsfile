@@ -7,6 +7,13 @@ pipeline {
     }
 
     stages {
+        stage('Check Node & npm Version') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
+        }
+
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/raj-dhamdhere/HealthExpress.git', credentialsId: 'github-token'
@@ -18,12 +25,12 @@ pipeline {
                 // Install backend dependencies
                 dir('backend') {
                     echo 'Installing backend dependencies...'
-                    sh 'npm install'
+                    sh 'npm install --unsafe-perm --verbose'  // Add verbose and unsafe-perm flags for debugging
                 }
                 // Install frontend dependencies
                 dir('frontend') {
                     echo 'Installing frontend dependencies...'
-                    sh 'npm install'
+                    sh 'npm install --unsafe-perm --verbose'  // Add verbose and unsafe-perm flags for debugging
                 }
             }
         }

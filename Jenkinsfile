@@ -16,7 +16,7 @@ pipeline {
 
         stage('Verify Backend Directory') {
             steps {
-                dir('backend') {
+                dir('Backend') {
                     echo 'Checking contents of backend directory...'
                     sh 'ls -la'
                 }
@@ -25,20 +25,20 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                dir('backend') {
+                dir('Backend') {
                     echo 'Installing backend dependencies...'
-                    sh 'npm install --unsafe-perm --verbose'
+                    sh 'npm install'
                 }
-                dir('frontend') {
+                dir('client') {
                     echo 'Installing frontend dependencies...'
-                    sh 'npm install --unsafe-perm --verbose'
+                    sh 'npm install'
                 }
             }
         }
 
         stage('Build') {
             steps {
-                dir('frontend') {
+                dir('client') {
                     echo 'Building frontend...'
                     sh 'npm run build'
                 }
@@ -47,11 +47,11 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                dir('backend') {
+                dir('Backend') {
                     echo 'Starting backend server with pm2...'
                     sh 'pm2 start index.js --name "app-backend" || node index.js'
                 }
-                dir('frontend') {
+                dir('client') {
                     echo 'Starting frontend application with pm2...'
                     sh 'npm start'
                 }

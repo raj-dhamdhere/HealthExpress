@@ -6,6 +6,9 @@ pipeline {
         PATH = "${NODE_HOME}:${env.PATH}"
     }
 
+    options {
+        timeout(time: 30, unit: 'MINUTES')  // Sets a maximum time for the entire pipeline
+    }
 
     stages {
         stage('Clone Repository') {
@@ -25,13 +28,18 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                dir('Backend') {
-                    echo 'Installing backend dependencies...'
-                    sh 'npm install'
+                cache(path: './Backend/node_modules', key: 'npm-backend') {  // Cache backend dependencies
+                    dir('Backend') {
+                        echo 'Installing backend dependencies...'
+                        sh 'npm install --quiet'  // Reduced verbosity
+                    }
                 }
-                dir('client') {
-                    echo 'Installing frontend dependencies...'
-                    sh 'npm install'
+
+                cache(path: './client/node_modules', key: 'npm-client') {  // Cache frontend dependencies
+                    dir('client') {
+                        echo 'Installing frontend dependencies...'
+                        sh 'npm install --quiet'  // Reduced verbosity
+                    }
                 }
             }
         }
@@ -40,7 +48,9 @@ pipeline {
             steps {
                 dir('client') {
                     echo 'Building frontend...'
-                    sh 'npm run build'
+                    timeout(time: 15, unit: 'MINUTES') {  // Adds a timeout to the build step
+                        sh 'npm run build --quiet'  // Reduced verbosity
+                    }
                 }
             }
         }

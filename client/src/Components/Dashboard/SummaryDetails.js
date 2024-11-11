@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from "axios";
 import { CircularProgress, Typography, Box } from "@mui/material";
@@ -10,13 +10,12 @@ export default function Summary() {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [mrn, setMrn] = useState(null);
-  const [storedUser, setStoredUser] = useState({});
+  // const [storedUser, setStoredUser] = useState({});
 
   useEffect(() => {
     const storedUserData = sessionStorage.getItem("user");
     if (storedUserData) {
       const data = JSON.parse(storedUserData);
-      setStoredUser(data);
       if (data.id) {
         setMrn(data.id);
       } else {
@@ -25,13 +24,8 @@ export default function Summary() {
     }
   }, []);
 
-  useEffect(() => {
-    if (mrn) {
-      getUserData();
-    }
-  }, [mrn]);
 
-  const getUserData = async () => {
+  const getUserData = useCallback(async () => {
     try {
       let response = await axios.post(`${API_URL}/api/getAppointmentSummary`, { mrn: mrn });
       console.log("Response data:", response.data.data);
@@ -57,8 +51,15 @@ export default function Summary() {
       console.error("Error fetching user data:", error);
       setLoading(false);
     }
-  };
+  },[mrn]);
   
+  useEffect(() => {
+    // Call getUserData when mrn is set
+    if (mrn) {
+      getUserData();
+    }
+  }, [mrn,getUserData]); // Depend on mrn so it runs whenever mrn changes
+
 
   const columns = [
     { field: "mrn", headerName: "MRN", width: 100 },

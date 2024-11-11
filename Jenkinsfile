@@ -47,7 +47,7 @@ pipeline {
             steps {
                 dir('client') {
                     echo 'Starting frontend application with pm2...'
-                    bat 'npm start'
+                    bat 'pm2 start npm --name "frontend" -- start --node-args="--max-old-space-size=2048"'
                 }
             }
         }

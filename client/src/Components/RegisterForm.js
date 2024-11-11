@@ -13,16 +13,10 @@ const Register = () => {
   const [password, setpassword] = useState();
   const [email, setemail] = useState();
   const [county, setcounty] = useState();
-  const [pincode, setpincode] = useState();
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [pps, setpps] = useState();
   const [address, setaddress] = useState();
-  const [toggleState, setToggleState] = useState("no");
-  const [insnumber, setinsnumber] = useState();
 
-  const handleDateChange = (newDate) => {
-    setSelectedDate(newDate);
-  };
+
+
 
   const styles = {
 	formContainer: {

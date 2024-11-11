@@ -12,7 +12,7 @@ const Test = () => {
 					<div className="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
 						<div className="col-xl-8 col-lg-8">
 							<img src="assets/img/logoj.png" height="60px" width="500px" className="img-fluid" alt="Health Express Logo" />
-							<h2></h2>
+							
 						</div>
 					</div>
 					<div className="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
@@ -114,7 +114,7 @@ const Test = () => {
 					<div className="text-center">
 						<h3>Call To Action</h3>
 						<p>Our Motto is to Provide Top Notch Support To Our Customers.</p>
-						<a className="cta-btn" href="#">Call To Action</a>
+						<a className="cta-btn" href="/">Call To Action</a>
 					</div>
 				</div>
 			</section>

@@ -1,25 +1,8 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import Carousel from 'react-bootstrap/Carousel';
-import FormControl from 'react-bootstrap/FormControl';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import NavbarComponent from "./Navbar.js";
 import LoginComponent from "./LoginForm.js";
 
-
-import {
-    BrowserRouter as Router,
-    Route, Link, Switch
-} from "react-router-dom";
-
 class About extends React.Component {
-    constructor() {
-        super();
-    }
     render() {
         return (
             <div>
@@ -44,11 +27,11 @@ class About extends React.Component {
 											<strong>Email:</strong> infod@gmail.com<br />
 										</p>
 										<div class="social-links mt-3">
-											<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-											<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-											<a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-											<a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-											<a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+											<a href="/" class="twitter"><i class="bx bxl-twitter"></i></a>
+											<a href="/" class="facebook"><i class="bx bxl-facebook"></i></a>
+											<a href="/" class="instagram"><i class="bx bxl-instagram"></i></a>
+											<a href="/" class="google-plus"><i class="bx bxl-skype"></i></a>
+											<a href="/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
 										</div>
 									</div>
 								</div>
@@ -92,7 +75,7 @@ class About extends React.Component {
 							&copy; Copyright <strong><span>Health Express </span></strong>. All Rights Reserved
 						</div>
 						<div class="credits">
-							Designed by <a href="">Health Express </a>
+							Designed by <a href="/">Health Express </a>
 						</div>
 					</div>
 				</footer>

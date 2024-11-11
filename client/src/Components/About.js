@@ -45,11 +45,11 @@ const About = () => {
                                         <strong>Email:</strong> infod@gmail.com<br />
                                     </p>
                                     <div className="social-links mt-3">
-                                        <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
-                                        <a href="#" className="facebook"><i className="bx bxl-facebook"></i></a>
-                                        <a href="#" className="instagram"><i className="bx bxl-instagram"></i></a>
-                                        <a href="#" className="google-plus"><i className="bx bxl-skype"></i></a>
-                                        <a href="#" className="linkedin"><i className="bx bxl-linkedin"></i></a>
+                                        <a href="/" className="twitter"><i className="bx bxl-twitter"></i></a>
+                                        <a href="/" className="facebook"><i className="bx bxl-facebook"></i></a>
+                                        <a href="/" className="instagram"><i className="bx bxl-instagram"></i></a>
+                                        <a href="/" className="google-plus"><i className="bx bxl-skype"></i></a>
+                                        <a href="/" className="linkedin"><i className="bx bxl-linkedin"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@ const About = () => {
                         &copy; Copyright <strong><span>Health Express</span></strong>. All Rights Reserved
                     </div>
                     <div className="credits">
-                        Designed by <a href="#">Health Express</a>
+                        Designed by <a href="/">Health Express</a>
                     </div>
                 </div>
             </footer>

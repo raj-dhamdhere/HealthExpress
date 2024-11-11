@@ -13,7 +13,6 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const navigate = useNavigate();
 
@@ -47,9 +46,9 @@ const Sidebar = () => {
       }}
     >
       <ProSidebar
-        collapsed={isCollapsed}
+        collapsed={false}
         style={{
-          width: isCollapsed ? "80px" : "300px",
+          width: false ? "80px" : "300px",
           height: "100%",
           transition: "width 0.3s",
         }}
@@ -57,7 +56,7 @@ const Sidebar = () => {
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            icon={false ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
               color: colors.grey[100],
@@ -68,7 +67,7 @@ const Sidebar = () => {
               WebkitUserSelect: "none",
             }}
           >
-            {!isCollapsed && (
+            {!false && (
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -97,7 +96,7 @@ const Sidebar = () => {
             )}
           </MenuItem>
 
-          <Box paddingLeft={isCollapsed ? undefined : "5%"}>
+          <Box paddingLeft={false ? undefined : "5%"}>
             <MenuItem
               active={selected === "Dashboard"}
               style={{

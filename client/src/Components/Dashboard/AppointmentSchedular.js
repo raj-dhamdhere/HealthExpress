@@ -3,14 +3,12 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { TextField, Checkbox } from "@mui/material";
+import { TextField} from "@mui/material";
 import {
   LocalizationProvider,
-  DateTimePicker,
   DatePicker,
 } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import Swal from "sweetalert2";
 import "./AppointmentSchedular.css"; // Import your custom CSS styles here
 const API_URL = "http://localhost:3001";

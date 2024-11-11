@@ -1,13 +1,12 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useCallback } from "react";
 import axios from "axios";
 import { TextField,Checkbox } from "@mui/material";
 import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Swal from "sweetalert2";
-import BootstrapSwitchButton from "bootstrap-switch-button-react";
 const API_URL = "http://localhost:3001";
 
 const Register = () => {
@@ -61,18 +60,13 @@ const Register = () => {
     }
   }, []); // Empty dependency array to run only on mount
 
-  useEffect(() => {
-    // Call getUserData when mrn is set
-    if (mrn) {
-      getUserData();
-    }
-  }, [mrn]); // Depend on mrn so it runs whenever mrn changes
 
-  const getUserData = async () => {
+
+  const getUserData = useCallback(async () => {
     try {
       let response = await axios.post(`${API_URL}/api/getUserData`, { id: mrn });
       console.log("Response data:", response.data.data);
-
+  
       if (response.data && response.data.data) {
         setfname(response.data.data.fname);
         setlname(response.data.data.lname);
@@ -82,22 +76,25 @@ const Register = () => {
         setpincode(response.data.data.pincode);
         setpps(response.data.data.pps);
         setaddress(response.data.data.address);
-
         setToggleState(response.data.data.haveInsurance);
-
         setinsnumber(response.data.data.insurancenumber);
-
-      const dateFromResponse = new Date(response.data.data.dob); // Assuming dob is in ISO format
-      setSelectedDate(dateFromResponse); // Set the selected date
+  
+        const dateFromResponse = new Date(response.data.data.dob); // Assuming dob is in ISO format
+        setSelectedDate(dateFromResponse); // Set the selected date
       } else {
         console.error("User data is not available in the response.");
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
-  };
+  }, [mrn]);
 
-
+  useEffect(() => {
+    // Call getUserData when mrn is set
+    if (mrn) {
+      getUserData();
+    }
+  }, [mrn,getUserData]); // Depend on mrn so it runs whenever mrn changes
 
   // const checkPhoneNo = async (e) => {
   // 	await setnumber(e);

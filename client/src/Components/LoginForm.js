@@ -1,32 +1,19 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { TextField } from "@mui/material";
-import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import Swal from "sweetalert2";
-const API_URL = "http://ec2-34-246-124-95.eu-west-1.compute.amazonaws.com:3001";
+const API_URL = "http://localhost:3001";
 
 const Login = () => {
-  const [fname, setfname] = useState();
-  const [lname, setlname] = useState();
   const [number, setnumber] = useState();
   const [password, setpassword] = useState();
-  const [email, setemail] = useState();
-  const [county, setcounty] = useState();
-  const [pincode, setpincode] = useState();
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [pps, setpps] = useState();
-  const [address, setaddress] = useState();
-  const [toggleState, setToggleState] = useState(false);
-  const [insnumber, setinsnumber] = useState();
+  // const [selectedDate, setSelectedDate] = useState(new Date());
   const [user, setUser] = useState(null);
-  const handleDateChange = (newDate) => {
-    setSelectedDate(newDate);
-  };
+  // const handleDateChange = (newDate) => {
+  //   setSelectedDate(newDate);
+  // };
 
   // const checkPhoneNo = async (e) => {
   // 	await setnumber(e);
@@ -74,12 +61,13 @@ const Login = () => {
       });
 
       console.log(response);
-      if (response.data.success == true) {
+      if (response.data.success === true) {
         // alert("Record Saved Successfully");
         setnumber("");
 		    setpassword("");
         sessionStorage.setItem("user", JSON.stringify(response.data.data));
         setUser(response.data.data); // Update local state
+        console.log(user)
         window.open("/dashboard", "_self");
       } else {
         Swal.fire({

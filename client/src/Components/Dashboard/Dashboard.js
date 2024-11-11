@@ -9,7 +9,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import "./Dashboard.css";
 
-const API_URL = "http://ec2-34-246-124-95.eu-west-1.compute.amazonaws.com:3001";
+const API_URL = "http://localhost:3001";
 
 const Dashboard = () => {
   const [storedUser, setStoredUser] = useState(null);
@@ -19,6 +19,7 @@ const Dashboard = () => {
     const storedUserdata = sessionStorage.getItem("user");
     if (storedUserdata) {
       const data = JSON.parse(storedUserdata);
+      console.log(storedUser)
       setStoredUser(data);
       if (data.id) {
         setmrn(data.id);
@@ -26,7 +27,7 @@ const Dashboard = () => {
         console.error("ID is not available in stored user data.");
       }
     }
-  }, []);
+  }, [storedUser]);
 
   const onDelete = async () => {
     Swal.fire({

@@ -54,7 +54,7 @@ pipeline {
             steps {
                 dir('client') {
                     echo 'Starting frontend application with pm2...'
-                    bat 'npm start'
+                    bat 'start /B npm start'
                 }
             }
         }

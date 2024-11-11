@@ -20,9 +20,17 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Install pm2 for process management
-                echo 'Installing pm2 globally...'
-                bat 'npm install -g pm2'
 
+                dir('Backend') {
+                echo 'Installing pm2 globally.for Backend..'
+                bat 'npm install -g pm2'
+                }
+            
+
+                dir('client') {
+                echo 'Installing pm2 globally.for Backend..'
+                bat 'npm install -g pm2'
+                }
                 // Backend dependencies
                 dir('Backend') {
                     echo 'Installing backend dependencies...'
@@ -43,19 +51,12 @@ pipeline {
             steps {
                 dir('Backend') {
                     echo 'Starting backend server with pm2...'
-                    bat 'pm2 start index.js --name "app-backend" || node index.js'
+                    bat 'pm2 start index.js --name "app-backend"'
                 }
             }
         }
 
-        stage('Deploy Frontend Build') {
-            steps {
-                dir('client') {
-                    echo 'Starting frontend application with pm2...'
-                    bat 'npm run build'
-                }
-            }
-        }
+
 
         stage('Deploy Frontend') {
             steps {

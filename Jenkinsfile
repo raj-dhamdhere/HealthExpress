@@ -47,7 +47,7 @@ pipeline {
             steps {
                 dir('client') {
                     echo 'Starting frontend application with pm2...'
-                    bat 'npm start'
+                    bat 'pm2 start npm --name app-frontend --interpreter cmd -- start'
                 }
             }
         }

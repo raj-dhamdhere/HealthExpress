@@ -21,15 +21,9 @@ pipeline {
             steps {
                 // Install pm2 for process management
 
-                dir('Backend') {
-                echo 'Installing pm2 globally.for Backend..'
-                bat 'npm install -g pm2'
-                }
-            
-
                 dir('client') {
                 echo 'Installing pm2 globally.for Backend..'
-                bat 'npm install -g pm2'
+                bat 'npm install pm2'
                 }
                 // Backend dependencies
                 dir('Backend') {

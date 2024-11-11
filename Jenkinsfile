@@ -19,7 +19,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo 'Installing pm2 and http-server globally...'
-                bat 'npm install -g pm2 http-server' // Install both pm2 and http-server
+                bat 'npm install -g pm2 http-server' // Install both pm2 and http-server globally
                 
                 // Install backend dependencies
                 dir('Backend') {
@@ -57,7 +57,7 @@ pipeline {
             steps {
                 dir('client') {
                     echo 'Serving frontend application with http-server...'
-                    bat 'pm2 start http-server --name "frontend" -- ./build -p 3000' // Updated command
+                    bat 'pm2 start "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\http-server" --name "frontend" -- ./build -p 3000' // Updated with full path to http-server
                 }
             }
         }

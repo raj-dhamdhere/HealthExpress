@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     environment {
-        NODE_HOME = '/usr/local/bin/'
-        PATH = "${NODE_HOME}:${env.PATH}"
+        NODE_HOME = 'C:\\Program Files\\nodejs'  // Adjust the path if Node.js is installed elsewhere
+        PATH = "${NODE_HOME};${env.PATH}"       // Add Node.js to PATH
     }
 
     options {
-        timeout(time: 45, unit: 'MINUTES')  // Sets a maximum time for the entire pipeline
+        timeout(time: 45, unit: 'MINUTES')       // Sets a maximum time for the entire pipeline
     }
 
     stages {
@@ -21,33 +21,22 @@ pipeline {
             steps {
                 dir('Backend') {
                     echo 'Checking contents of backend directory...'
-                    sh 'ls -la'
+                    bat 'dir'                      // Windows equivalent of `ls -la`
                 }
             }
         }
 
-        stage('Clean client Workspace') {
-            steps {
-                // Remove node_modules and package-lock.json if they exist
-                dir('client') {
-                    sh 'rm -rf node_modules'
-                    sh 'rm -f package-lock.json'
-                }
-
-            }
-        }
         
         stage('Install Dependencies') {
             steps {
                 dir('Backend') {
                     echo 'Installing backend dependencies...'
-                    sh 'npm install --quiet'  // Reduced verbosity
+                    bat 'npm install --quiet'       // Install dependencies for Backend
                 }
 
                 dir('client') {
                     echo 'Installing frontend dependencies...'
-                    
-                    sh 'npm install --force'  // Reduced verbosity
+                    bat 'npm install --force --quiet'  // Install dependencies for client
                 }
             }
         }
@@ -57,7 +46,7 @@ pipeline {
                 dir('client') {
                     echo 'Building frontend...'
                     timeout(time: 15, unit: 'MINUTES') {  // Adds a timeout to the build step
-                        sh 'npm run build --quiet'  // Reduced verbosity
+                        bat 'npm run build --quiet'       // Build frontend
                     }
                 }
             }
@@ -67,11 +56,12 @@ pipeline {
             steps {
                 dir('Backend') {
                     echo 'Starting backend server with pm2...'
-                    sh 'pm2 start index.js --name "app-backend" || node index.js'
+                    // Starts backend with pm2 if installed, otherwise fallback to node
+                    bat 'node index.js'
                 }
                 dir('client') {
                     echo 'Starting frontend application with pm2...'
-                    sh 'npm start'
+                    bat 'npm start'
                 }
             }
         }

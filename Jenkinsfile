@@ -43,7 +43,7 @@ pipeline {
             steps {
                 dir('Backend') {
                     echo 'Starting backend server with pm2...'
-                    bat 'node index.js'
+                    bat 'start /B node index.js'
                 }
             }
         }

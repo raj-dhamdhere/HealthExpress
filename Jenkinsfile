@@ -38,7 +38,7 @@ pipeline {
             steps {
                 dir('client') {
                     echo 'Building frontend...'
-                    bat 'npm run build'
+                    bat 'set CI=false && npm run build'
                 }
             }
         }

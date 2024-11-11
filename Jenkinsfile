@@ -4,7 +4,8 @@ pipeline {
     environment {
         NODE_HOME = 'C:\\Program Files\\nodejs'
         NPM_GLOBAL = 'C:\\Users\\Administrator\\AppData\\Roaming\\npm' // Update this path accordingly
-        BACKEND_NODE_BIN = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\NodeJS-Pipeline\\Backend\\node_modules\\.bin' // Path to local node_modules/.bin for Backend
+        BACKEND_NODE_BIN = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\NodeJS-Pipeline\\Backend\\node_modules\\.bin'
+        HOMEPATH = 'C:\\Users\\Administrator' // Set HOMEPATH for PM2 on Windows
         PATH = "${NODE_HOME};${NPM_GLOBAL};${BACKEND_NODE_BIN};${env.PATH}"
     }
 
@@ -17,8 +18,8 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo 'Installing pm2 globally...'
-                bat 'npm install -g pm2'
+                echo 'Installing pm2 and http-server globally...'
+                bat 'npm install -g pm2 http-server' // Install both pm2 and http-server
                 
                 // Install backend dependencies
                 dir('Backend') {
@@ -56,7 +57,7 @@ pipeline {
             steps {
                 dir('client') {
                     echo 'Serving frontend application with http-server...'
-                    bat 'pm2 start "http-server ./build -p 3000" --name "frontend"'
+                    bat 'pm2 start http-server --name "frontend" -- ./build -p 3000' // Updated command
                 }
             }
         }

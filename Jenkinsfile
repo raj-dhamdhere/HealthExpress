@@ -3,11 +3,9 @@ pipeline {
 
     environment {
         NODE_HOME = 'C:\\Program Files\\nodejs'
-        PATH = "${NODE_HOME};${env.PATH}"
-    }
-
-    options {
-        timeout(time: 45, unit: 'MINUTES')
+        NPM_GLOBAL = 'C:\\Users\\Administrator\\AppData\\Roaming\\npm' // Update this path accordingly
+        BACKEND_NODE_BIN = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\NodeJS-Pipeline\\Backend\\node_modules\\.bin' // Path to local node_modules/.bin for Backend
+        PATH = "${NODE_HOME};${NPM_GLOBAL};${BACKEND_NODE_BIN};${env.PATH}"
     }
 
     stages {
@@ -19,27 +17,22 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Install pm2 for process management
-
-                dir('client') {
-                echo 'Installing pm2 globally.for Backend..'
-                bat 'npm install pm2'
-                }
-                // Backend dependencies
+                echo 'Installing pm2 globally...'
+                bat 'npm install -g pm2'
+                
+                // Install backend dependencies
                 dir('Backend') {
                     echo 'Installing backend dependencies...'
                     bat 'npm install --quiet'
                 }
 
-                // Frontend dependencies
+                // Install frontend dependencies
                 dir('client') {
                     echo 'Installing frontend dependencies...'
                     bat 'npm install --force --quiet'
                 }
             }
         }
-
-
 
         stage('Deploy Backend') {
             steps {
@@ -49,8 +42,6 @@ pipeline {
                 }
             }
         }
-
-
 
         stage('Deploy Frontend') {
             steps {

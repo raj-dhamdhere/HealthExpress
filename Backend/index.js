@@ -18,9 +18,9 @@ import router from "./Routes/Router.js";
 app.use("/", router);
 
 import path from "path";
-app.get("*", (req, res) => {
-	res.sendFile(path.join(path.resolve() + "/public/build/index.html"));
-});
+// app.get("*", (req, res) => {
+// 	res.sendFile(path.join(path.resolve() + "/public/build/index.html"));
+// });
 
 
 

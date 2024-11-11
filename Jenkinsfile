@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     environment {
-        NODE_HOME = 'C:\\Program Files\\nodejs'  // Adjust the path if Node.js is installed elsewhere
-        PATH = "${NODE_HOME};${env.PATH}"       // Add Node.js to PATH
+        NODE_HOME = 'C:\\Program Files\\nodejs'
+        PATH = "${NODE_HOME};${env.PATH}"
     }
 
     options {
-        timeout(time: 45, unit: 'MINUTES')       // Sets a maximum time for the entire pipeline
+        timeout(time: 45, unit: 'MINUTES')
     }
 
     stages {
@@ -17,41 +17,42 @@ pipeline {
             }
         }
 
-        stage('Verify Backend Directory') {
-            steps {
-                dir('Backend') {
-                    echo 'Checking contents of backend directory...'
-                    bat 'dir'                      // Windows equivalent of `ls -la`
-                }
-            }
-        }
-
-        
         stage('Install Dependencies') {
             steps {
+                // Install pm2 for process management
+                echo 'Installing pm2 globally...'
+                bat 'npm install -g pm2'
+
+                // Backend dependencies
                 dir('Backend') {
                     echo 'Installing backend dependencies...'
-                    bat 'npm install --quiet'       // Install dependencies for Backend
+                    bat 'npm install --quiet'
                 }
 
+                // Frontend dependencies
                 dir('client') {
                     echo 'Installing frontend dependencies...'
-                    bat 'npm install --force --quiet'  // Install dependencies for client
+                    bat 'npm install --force --quiet'
                 }
             }
         }
 
 
-        stage('Deploy') {
+
+        stage('Deploy Backend') {
             steps {
                 dir('Backend') {
                     echo 'Starting backend server with pm2...'
-                    // Starts backend with pm2 if installed, otherwise fallback to node
-                    bat 'node index.js'
+                    bat 'pm2 start index.js --name "app-backend" || node index.js'
                 }
+            }
+        }
+
+        stage('Deploy Frontend') {
+            steps {
                 dir('client') {
                     echo 'Starting frontend application with pm2...'
-                    bat 'start /B npm start'
+                    bat 'pm2 start npm --name "frontend" -- start'
                 }
             }
         }

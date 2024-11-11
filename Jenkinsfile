@@ -34,6 +34,15 @@ pipeline {
             }
         }
 
+        stage('Build Frontend') {
+            steps {
+                dir('client') {
+                    echo 'Building frontend...'
+                    bat 'npm run build'
+                }
+            }
+        }
+
         stage('Deploy Backend') {
             steps {
                 dir('Backend') {
@@ -46,12 +55,19 @@ pipeline {
         stage('Deploy Frontend') {
             steps {
                 dir('client') {
-                    echo 'Starting frontend application with pm2...'
-                    bat 'npm start'
+                    echo 'Serving frontend application with http-server...'
+                    bat 'pm2 start "http-server ./build -p 3000" --name "frontend"'
                 }
             }
         }
     }
 
-
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
 }

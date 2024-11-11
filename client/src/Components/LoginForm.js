@@ -8,7 +8,7 @@ import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import Swal from "sweetalert2";
-const API_URL = "http://localhost:3001";
+const API_URL = "http://ec2-34-246-124-95.eu-west-1.compute.amazonaws.com:3001";
 
 const Login = () => {
   const [fname, setfname] = useState();

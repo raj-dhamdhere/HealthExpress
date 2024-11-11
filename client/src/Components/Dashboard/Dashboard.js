@@ -9,7 +9,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import "./Dashboard.css";
 
-const API_URL = "http://localhost:3001";
+const API_URL = "http://ec2-34-246-124-95.eu-west-1.compute.amazonaws.com:3001";
 
 const Dashboard = () => {
   const [storedUser, setStoredUser] = useState(null);

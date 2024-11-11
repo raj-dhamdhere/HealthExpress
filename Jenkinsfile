@@ -41,16 +41,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                dir('client') {
-                    echo 'Building frontend...'
-                    timeout(time: 15, unit: 'MINUTES') {  // Adds a timeout to the build step
-                        bat 'npm run build --quiet'       // Build frontend
-                    }
-                }
-            }
-        }
 
         stage('Deploy') {
             steps {

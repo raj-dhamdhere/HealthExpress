@@ -48,11 +48,20 @@ pipeline {
             }
         }
 
+        stage('Deploy Frontend Build') {
+            steps {
+                dir('client') {
+                    echo 'Starting frontend application with pm2...'
+                    bat 'npm run build'
+                }
+            }
+        }
+
         stage('Deploy Frontend') {
             steps {
                 dir('client') {
                     echo 'Starting frontend application with pm2...'
-                    bat 'pm2 start npm --name "frontend" -- start'
+                    bat 'npm start'
                 }
             }
         }

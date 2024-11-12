@@ -57,11 +57,19 @@ pipeline {
             steps {
                 dir('client') {
                     echo 'Serving frontend application with http-server in the background...'
-                    //bat 'start "" node "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\http-server\\bin\\http-server" ./build -p 3000'
-                    bat 'node "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\http-server\\bin\\http-server" ./build -p 3000' // Directly specifying http-server path
+                    bat 'start /B node "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\http-server\\bin\\http-server" ./build -p 3000'
+        
+                    // Give it some time for the server to start
+                    echo 'Waiting for frontend to start...'
+                    bat 'timeout /t 30'
+        
+                    // Optional: Add a test to verify if the frontend is running
+                    echo 'Checking if frontend is accessible...'
+                    bat 'curl http://localhost:3000'
                 }
             }
         }
+
 
     }
 

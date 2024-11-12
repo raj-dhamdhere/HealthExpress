@@ -57,7 +57,7 @@ pipeline {
             steps {
                 dir('client') {
                     echo 'Serving frontend application with http-server...'
-                    bat 'pm2 start "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\http-server" --name "frontend" -- ./build -p 3000' // Updated with full path to http-server
+                    bat 'node "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\http-server\\bin\\http-server" ./build -p 3000' // Directly specifying http-server path
                 }
             }
         }

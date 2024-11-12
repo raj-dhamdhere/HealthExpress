@@ -35,14 +35,14 @@ pipeline {
             }
         }
 
-        stage('Build Frontend') {
-            steps {
-                dir('client') {
-                    echo 'Building frontend...'
-                    bat 'set CI=false && npm run build'
-                }
-            }
-        }
+        // stage('Build Frontend') {
+        //     steps {
+        //         dir('client') {
+        //             echo 'Building frontend...'
+        //             bat 'set CI=false && npm run build'
+        //         }
+        //     }
+        // }
 
         stage('Deploy Backend') {
             steps {
@@ -56,16 +56,26 @@ pipeline {
         stage('Deploy Frontend') {
             steps {
                 dir('client') {
-                    echo 'Starting frontend application...'
+                    echo 'Starting frontend application in the background and monitoring output...'
                     bat '''
-                        start /B npm start > npm_output.log
-                        timeout /T 25
+                        REM Start npm in the background and redirect output to npm_output.log
+                        start /B cmd /c "npm start > npm_output.log 2>&1"
+        
+                        REM Wait until "Compiled successfully!" appears in the output
+                        :loop
                         findstr /C:"Compiled successfully" npm_output.log
-                        taskkill /F /IM node.exe
+                        if %errorlevel% neq 0 (
+                            ping -n 2 127.0.0.1 >nul
+                            goto loop
+                        )
+        
+                        REM Kill the npm process after detecting the output
+                        for /f "tokens=5" %%a in ('netstat -aon ^| findstr :3000') do taskkill /PID %%a /F
                     '''
                 }
             }
         }
+
 
 
 

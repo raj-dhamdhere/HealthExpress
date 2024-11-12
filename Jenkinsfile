@@ -58,11 +58,10 @@ pipeline {
                 dir('client') {
                     echo 'Serving frontend application with http-server in the background...'
                     bat 'start /B node --max-old-space-size=2048 "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\http-server\\bin\\http-server" ./build -p 3000'
-'
-        
                 }
             }
         }
+
 
 
     }

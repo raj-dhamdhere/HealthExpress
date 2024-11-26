@@ -7,6 +7,10 @@ pipeline {
         BACKEND_NODE_BIN = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\NodeJS-Pipeline\\Backend\\node_modules\\.bin'
         HOMEPATH = 'C:\\Users\\Administrator'
         PATH = "${NODE_HOME};${NPM_GLOBAL};${BACKEND_NODE_BIN};${env.PATH}"
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')  // AWS Credentials stored in Jenkins
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')  // AWS Credentials stored in Jenkins
+        S3_BUCKET_NAME = '23122498frontendhealthexpress'  // Replace with your S3 bucket name
+        REGION = 'eu-west-1'  // Set your AWS region (adjust if necessary)
     }
 
     stages {
@@ -53,16 +57,27 @@ pipeline {
             }
         }
 
-        stage('Serve Frontend with PM2 on Port 3000') {
+        stage('Test AWS Credentials') {
+            steps {
+                bat 'aws s3 ls --region $REGION'
+            }
+        }    
+
+        stage('Deploy Frontend to S3') {
             steps {
                 script {
-                    echo 'Serving frontend with PM2 on port 3000...'
+                    echo 'Uploading frontend build to S3...'
 
-                    // Copy the build files from frontend to the location PM2 will serve from
-                    bat 'xcopy client\\build C:\\frontend /E /Y'
+                    // Use AWS CLI to sync the build folder to the S3 bucket
+                    bat '''
+                    aws s3 sync client\\build s3://$S3_BUCKET_NAME/ --region $REGION --delete
+                    '''
 
-                    // Serve the frontend with PM2
-                    bat 'pm2 serve C:\\frontend\\build --name "app-frontend" --spa --port 3000'
+                    // Optional: Set cache-control headers for the uploaded assets for better performance
+                    bat '''
+                    aws s3 cp client\\build\\index.html s3://$S3_BUCKET_NAME/index.html --region $REGION --cache-control "no-cache, no-store, must-revalidate"
+                    aws s3 cp client\\build\\assets s3://$S3_BUCKET_NAME/assets/ --recursive --region $REGION --cache-control "public, max-age=31536000"
+                    '''
                 }
             }
         }

@@ -19,7 +19,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo 'Installing pm2 globally...'
-                bat 'npm install -g pm2' // Only install pm2 globally
+                bat 'npm install -g pm2' // Install pm2 globally
 
                 // Install backend dependencies
                 dir('Backend') {
@@ -53,48 +53,16 @@ pipeline {
             }
         }
 
-        stage('Deploy Frontend with NGINX on Port 3000') {
+        stage('Serve Frontend with PM2 on Port 3000') {
             steps {
                 script {
-                    // Ensure NGINX is installed on your EC2 instance
-                    echo 'Deploying frontend with NGINX on port 3000...'
-                    
-                    // Copy build files to NGINX directory
-                    bat '''
-                    if not exist "C:\\nginx" (
-                        echo Downloading and setting up NGINX...
-                        powershell -Command "Invoke-WebRequest -Uri https://nginx.org/download/nginx-1.25.2.zip -OutFile nginx.zip; Expand-Archive -Path nginx.zip -DestinationPath C:\\; Rename-Item -Path C:\\nginx-* -NewName C:\\nginx"
-                    )
-                    xcopy client\\build C:\\nginx\\html /E /Y
-                    '''
+                    echo 'Serving frontend with PM2 on port 3000...'
 
-                    // Update NGINX configuration for port 3000
-                    writeFile file: 'C:\\nginx\\conf\\nginx.conf', text: '''
-                    worker_processes 1;
-                    events { worker_connections 1024; }
-                    http {
-                        server {
-                            listen 3000;
-                            server_name localhost;
+                    // Copy the build files from frontend to the location PM2 will serve from
+                    bat 'xcopy client\\build C:\\frontend /E /Y'
 
-                            location / {
-                                root C:/nginx/html;
-                                index index.html;
-                            }
-
-                            # Redirect other routes to index.html for SPA
-                            location / {
-                                try_files $uri /index.html;
-                            }
-                        }
-                    }
-                    '''
-
-                    // Restart NGINX to apply changes
-                    bat '''
-                    taskkill /F /IM nginx.exe || echo NGINX not running, starting it now...
-                    start /B C:\\nginx\\nginx.exe
-                    '''
+                    // Serve the frontend with PM2
+                    bat 'pm2 serve C:\\frontend\\build --name "app-frontend" --spa --port 3000'
                 }
             }
         }

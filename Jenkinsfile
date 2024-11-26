@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         NODE_HOME = 'C:\\Program Files\\nodejs'
-        NPM_GLOBAL = 'C:\\Users\\Administrator\\AppData\\Roaming\\npm' // Update this path accordingly
+        NPM_GLOBAL = 'C:\\Users\\Administrator\\AppData\\Roaming\\npm'
         BACKEND_NODE_BIN = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\NodeJS-Pipeline\\Backend\\node_modules\\.bin'
-        HOMEPATH = 'C:\\Users\\Administrator' // Set HOMEPATH for PM2 on Windows
+        HOMEPATH = 'C:\\Users\\Administrator'
         PATH = "${NODE_HOME};${NPM_GLOBAL};${BACKEND_NODE_BIN};${env.PATH}"
     }
 
@@ -18,9 +18,9 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo 'Installing pm2 and http-server globally...'
-                bat 'npm install -g pm2 http-server' // Install both pm2 and http-server globally
-                
+                echo 'Installing pm2 globally...'
+                bat 'npm install -g pm2' // Only install pm2 globally
+
                 // Install backend dependencies
                 dir('Backend') {
                     echo 'Installing backend dependencies...'
@@ -35,14 +35,14 @@ pipeline {
             }
         }
 
-        // stage('Build Frontend') {
-        //     steps {
-        //         dir('client') {
-        //             echo 'Building frontend...'
-        //             bat 'set CI=false && npm run build'
-        //         }
-        //     }
-        // }
+        stage('Build Frontend') {
+            steps {
+                dir('client') {
+                    echo 'Building frontend...'
+                    bat 'set CI=false && npm run build'
+                }
+            }
+        }
 
         stage('Deploy Backend') {
             steps {
@@ -53,33 +53,51 @@ pipeline {
             }
         }
 
-        stage('Deploy Frontend') {
+        stage('Deploy Frontend with NGINX on Port 3000') {
             steps {
-                dir('client') {
-                    echo 'Starting frontend application in the background and monitoring output...'
+                script {
+                    // Ensure NGINX is installed on your EC2 instance
+                    echo 'Deploying frontend with NGINX on port 3000...'
+                    
+                    // Copy build files to NGINX directory
                     bat '''
-                        REM Start npm in the background and redirect output to npm_output.log
-                        start /B cmd /c "npm start > npm_output.log 2>&1"
-        
-                        REM Wait until "Compiled successfully!" appears in the output
-                        :loop
-                        findstr /C:"Compiled successfully" npm_output.log
-                        if %errorlevel% neq 0 (
-                            ping -n 2 127.0.0.1 >nul
-                            goto loop
-                        )
-        
-                        REM Kill the npm process after detecting the output
-                        for /f "tokens=5" %%a in ('netstat -aon ^| findstr :3000') do taskkill /PID %%a /F
+                    if not exist "C:\\nginx" (
+                        echo Downloading and setting up NGINX...
+                        powershell -Command "Invoke-WebRequest -Uri https://nginx.org/download/nginx-1.25.2.zip -OutFile nginx.zip; Expand-Archive -Path nginx.zip -DestinationPath C:\\; Rename-Item -Path C:\\nginx-* -NewName C:\\nginx"
+                    )
+                    xcopy client\\build C:\\nginx\\html /E /Y
+                    '''
+
+                    // Update NGINX configuration for port 3000
+                    writeFile file: 'C:\\nginx\\conf\\nginx.conf', text: '''
+                    worker_processes 1;
+                    events { worker_connections 1024; }
+                    http {
+                        server {
+                            listen 3000;
+                            server_name localhost;
+
+                            location / {
+                                root C:/nginx/html;
+                                index index.html;
+                            }
+
+                            # Redirect other routes to index.html for SPA
+                            location / {
+                                try_files $uri /index.html;
+                            }
+                        }
+                    }
+                    '''
+
+                    // Restart NGINX to apply changes
+                    bat '''
+                    taskkill /F /IM nginx.exe || echo NGINX not running, starting it now...
+                    start /B C:\\nginx\\nginx.exe
                     '''
                 }
             }
         }
-
-
-
-
-
     }
 
     post {

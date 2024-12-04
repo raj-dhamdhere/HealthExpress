@@ -17,7 +17,7 @@ const Test = () => {
 					</div>
 					<div className="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
 						{[
-							{ icon: "ri-store-line", text: "Remote Registration Raj" },
+							{ icon: "ri-store-line", text: "Remote Registration Ram" },
 							{ icon: "ri-bar-chart-box-line", text: "Flexible Appointment Scheduling" },
 							{ icon: "ri-calendar-todo-line", text: "Patient Portal Access" },
 							{ icon: "ri-paint-brush-line", text: "Patient Demographics" },

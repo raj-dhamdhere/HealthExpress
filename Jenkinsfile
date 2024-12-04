@@ -58,14 +58,22 @@ pipeline {
                 script {
                     echo 'Serving frontend with PM2 on port 3000...'
 
-                    // Copy the build files from frontend to the location PM2 will serve from
+                    // Ensure the target directory exists
+                    bat '''
+                    if not exist C:\\frontend (
+                        mkdir C:\\frontend
+                    )
+                    '''
+
+                    // Copy the build files from frontend to the target directory
                     bat 'xcopy client\\build C:\\frontend /E /Y'
 
                     // Serve the frontend with PM2
-                    bat 'pm2 serve C:\\frontend\\build --name "app-frontend" --spa --port 3000'
+                    bat 'pm2 serve C:\\frontend --name "app-frontend" --spa --port 3000'
                 }
             }
         }
+
     }
 
     post {

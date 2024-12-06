@@ -7,7 +7,7 @@ pipeline {
         BACKEND_NODE_BIN = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\NodeJS-Pipeline\\Backend\\node_modules\\.bin'
         HOMEPATH = 'C:\\Users\\Administrator'
         PATH = "${NODE_HOME};${NPM_GLOBAL};${BACKEND_NODE_BIN};${env.PATH}"
-        SONAR_SCANNER_HOME = tool(name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation')
+        SONAR_SCANNER_HOME = tool(name: 'HealthExpress-SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation')
         SONARQUBE_TOKEN = credentials('SonarQube-Token') // Use the ID you provided for the token
     }
 

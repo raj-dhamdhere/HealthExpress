@@ -7,6 +7,8 @@ pipeline {
         BACKEND_NODE_BIN = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\NodeJS-Pipeline\\Backend\\node_modules\\.bin'
         HOMEPATH = 'C:\\Users\\Administrator'
         PATH = "${NODE_HOME};${NPM_GLOBAL};${BACKEND_NODE_BIN};${env.PATH}"
+        SONAR_SCANNER_HOME = tool(name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation')
+        SONARQUBE_TOKEN = credentials('SonarQube-Token') // Use the ID you provided for the token
     }
 
     stages {
@@ -44,12 +46,27 @@ pipeline {
             }
         }
 
-        // stage('Clean PM2 Processes') {
-        //     steps {
-        //         echo 'Deleting all existing PM2 processes...'
-        //         bat 'pm2 delete all || true' // Delete all PM2 processes, ignore errors if there are no processes running
-        //     }
-        // }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = SONAR_SCANNER_HOME
+                    bat """
+                    ${scannerHome}/bin/sonar-scanner.bat ^
+                    -Dsonar.projectKey=HealthExpress ^
+                    -Dsonar.sources=. ^
+                    -Dsonar.host.url=http://ec2-18-202-48-70.eu-west-1.compute.amazonaws.com:9000 ^
+                    -Dsonar.login=${SONARQUBE_TOKEN}  
+                    """
+                }
+            }
+        }
+
+        stage('Clean PM2 Processes') {
+            steps {
+                echo 'Deleting all existing PM2 processes...'
+                bat 'pm2 delete all' // Delete all PM2 processes, ignore errors if there are no processes running
+            }
+        }
 
         stage('Deploy Backend') {
             steps {

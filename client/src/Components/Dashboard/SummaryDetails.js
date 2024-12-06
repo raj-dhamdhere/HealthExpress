@@ -4,7 +4,7 @@ import axios from "axios";
 import { CircularProgress, Typography, Box } from "@mui/material";
 import "./SummaryStyles.css"; // Import your custom CSS styles here
 
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.REACT_APP_API_URL_EC2;
 
 export default function Summary() {
   const [userData, setUserData] = useState([]);

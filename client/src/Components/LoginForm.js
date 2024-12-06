@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.REACT_APP_API_URL_EC2;
 
 const Login = () => {
   const [number, setnumber] = useState();

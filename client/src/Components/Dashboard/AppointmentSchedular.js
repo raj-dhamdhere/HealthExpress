@@ -11,7 +11,7 @@ import {
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Swal from "sweetalert2";
 import "./AppointmentSchedular.css"; // Import your custom CSS styles here
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.REACT_APP_API_URL_EC2;
 
 const Register = () => {
   const [mode, setMode] = useState("find"); // Track the current mode

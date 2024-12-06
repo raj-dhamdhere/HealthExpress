@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 // import { Button, Container } from "@material-ui/core";
 import { Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.REACT_APP_API_URL_EC2;
 
 
 function preventDefault(event) {

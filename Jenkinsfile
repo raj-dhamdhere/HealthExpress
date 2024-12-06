@@ -44,6 +44,13 @@ pipeline {
             }
         }
 
+        stage('Clean PM2 Processes') {
+            steps {
+                echo 'Deleting all existing PM2 processes...'
+                bat 'pm2 delete all || true' // Delete all PM2 processes, ignore errors if there are no processes running
+            }
+        }
+
         stage('Deploy Backend') {
             steps {
                 dir('Backend') {

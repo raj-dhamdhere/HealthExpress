@@ -7,7 +7,7 @@ import { TextField,Checkbox } from "@mui/material";
 import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Swal from "sweetalert2";
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.REACT_APP_API_URL_EC2;
 
 const Register = () => {
   const [fname, setfname] = useState();

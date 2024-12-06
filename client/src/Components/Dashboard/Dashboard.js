@@ -9,7 +9,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import "./Dashboard.css";
 
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.REACT_APP_API_URL_EC2;
 
 const Dashboard = () => {
   const [storedUser, setStoredUser] = useState(null);

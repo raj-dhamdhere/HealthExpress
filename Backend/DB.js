@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-let MongoClient = mongodb.MongoClient;
-let ObjectId = mongodb.ObjectId;
+const MongoClient = mongodb.MongoClient;
+const ObjectId = mongodb.ObjectId;
 
 
  let connection = await MongoClient.connect(process.env.DB_URI_ATLAS);

@@ -20,8 +20,8 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo 'Installing pm2 globally...'
-                bat 'npm install -g pm2' // Install pm2 globally
+                // echo 'Installing pm2 globally...'
+                // bat 'npm install -g pm2' // Install pm2 globally
 
                 // Install backend dependencies
                 dir('Backend') {
@@ -46,20 +46,20 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    def scannerHome = SONAR_SCANNER_HOME
-                    bat """
-                    ${scannerHome}/bin/sonar-scanner.bat ^
-                    -Dsonar.projectKey=HealthExpress ^
-                    -Dsonar.sources=. ^
-                    -Dsonar.host.url=http://ec2-18-202-48-70.eu-west-1.compute.amazonaws.com:9000 ^
-                    -Dsonar.login=${SONARQUBE_TOKEN}  
-                    """
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         script {
+        //             def scannerHome = SONAR_SCANNER_HOME
+        //             bat """
+        //             ${scannerHome}/bin/sonar-scanner.bat ^
+        //             -Dsonar.projectKey=HealthExpress ^
+        //             -Dsonar.sources=. ^
+        //             -Dsonar.host.url=http://ec2-18-202-48-70.eu-west-1.compute.amazonaws.com:9000 ^
+        //             -Dsonar.login=${SONARQUBE_TOKEN}  
+        //             """
+        //         }
+        //     }
+        // }
 
         stage('Clean PM2 Processes') {
             steps {

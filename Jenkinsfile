@@ -61,12 +61,12 @@ pipeline {
             }
         }
 
-        stage('Clean PM2 Processes') {
-            steps {
-                echo 'Deleting all existing PM2 processes...'
-                bat 'pm2 delete all' // Delete all PM2 processes, ignore errors if there are no processes running
-            }
-        }
+        // stage('Clean PM2 Processes') {
+        //     steps {
+        //         echo 'Deleting all existing PM2 processes...'
+        //         bat 'pm2 delete all' // Delete all PM2 processes, ignore errors if there are no processes running
+        //     }
+        // }
 
         stage('Deploy Backend') {
             steps {
@@ -77,7 +77,7 @@ pipeline {
             }
         }
 
-        stage('Serve Frontend with PM2 on Port 3000') {
+        stage('Deploy Front End with Pm2') {
             steps {
                 script {
                     echo 'Serving frontend with PM2 on port 3000...'

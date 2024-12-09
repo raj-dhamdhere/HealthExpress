@@ -22,7 +22,7 @@ async function updateAppointmentData(req, res) {
   async function deleteAppointmentData(req, res) {
 	try {
 	  const result = await new Appointment().deleteAppointmentDetails(req.body); // Await the delete function
-	  res.send(result); // Send the result directly from the update method
+	  res.send(result); // Send the result directly from the delete method
 	} catch (e) {
 	  res.send({ success: false, error: e.toString() }); // Catch any errors
 	}

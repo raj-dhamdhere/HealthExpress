@@ -8,7 +8,7 @@ class Doctors {
         try {
             const doctors = await db
                 .collection(doctorCollection)
-                .find({}, { projection: { id: 1, name: 1 } }) // Select only id and name
+                .find({}, { projection: { id: 1, name: 1 } }) // Only id and name Selection from Doctor collection
                 .toArray();
             
             return doctors; // Return the retrieved data

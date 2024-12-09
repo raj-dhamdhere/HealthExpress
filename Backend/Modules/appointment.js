@@ -1,7 +1,7 @@
 import db, { appointmentsCollection } from "../DB.js";
 
 async function generateIncrementalAppointmentNumber(date, collection) {
-  // Query the collection for the maximum appointment number on that date
+  // Querying the Appointment Collection to get maximum appointment Number on that date
   const result = await db
     .collection(collection)
     .find({ appointmentDate: date }) // Filter by the specific date
@@ -21,15 +21,13 @@ async function generateIncrementalAppointmentNumber(date, collection) {
   return newAppointmentNumber;
 }
 
-// // Example usage
-// const plaintext = 'This is a secret message';
 
 class Appointment {
   constructor() {}
 
   async saveAppointmentData(userData) {
     try {
-      // Check if there's already an appointment with the same date, doctor, and slot
+      // Querying the collection to check existing appointment with the same parameters on that date
       const existingAppointment = await db
         .collection(appointmentsCollection)
         .findOne({
@@ -38,7 +36,7 @@ class Appointment {
           appointmentSlotContent: userData.appointmentSlotContent,
         });
 
-      // If an appointment exists with the same date, doctor, and slot, return an error
+      // return error if it exists
 
       if (existingAppointment) {
         return {
@@ -48,7 +46,7 @@ class Appointment {
         };
       }
 
-      // Generate a unique appointment number for the given date
+      // calling generateIncrementalAppointmentNumber to get unique appointment number
       let uniqueId = await generateIncrementalAppointmentNumber(
         userData.appointmentDate,
         appointmentsCollection

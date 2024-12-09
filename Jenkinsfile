@@ -53,7 +53,7 @@ pipeline {
                     bat """
                     ${scannerHome}/bin/sonar-scanner.bat ^
                     -Dsonar.projectKey=HealthExpress ^
-                    -Dsonar.sources=Backend/Controller,client/src/Components/Dashboard ^
+                    -Dsonar.sources=Backend/Controller,Backend/Modules,client/src/Components/Dashboard ^
                     -Dsonar.exclusions=node_modules/**,build/** ^
                     -Dsonar.host.url=http://ec2-18-202-48-70.eu-west-1.compute.amazonaws.com:9000 ^
                     -Dsonar.login=${SONARQUBE_TOKEN}  

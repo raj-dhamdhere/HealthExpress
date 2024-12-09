@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 
 // Generate a random 32-byte encryption key
-const encryptionKey = "Rajdhamdhere-is-Migate-Goku-akir";
+const encryptionKey = process.env.DB_EncryptionKey;
 
 
 
@@ -41,9 +41,6 @@ async function generateUniqueId(prefix, collection) {
 
     return customId;
 }
-
-// // Example usage
-// const plaintext = 'This is a secret message';
 
 
 class User {
@@ -157,7 +154,6 @@ class User {
   
 
 async loginUser(userData) {
-  // console.log(userData);
   try {
     
     let response = await db.collection(userCollection).findOne({ number: userData.number });

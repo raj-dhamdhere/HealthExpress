@@ -1,27 +1,4 @@
 import db, { appointmentsCollection } from "../DB.js";
-import crypto from "crypto";
-
-// Generate a random 32-byte encryption key
-const encryptionKey = "Rajdhamdhere-is-Migate-Goku-akir";
-
-// Function to encrypt data
-function encryptData(plaintext) {
-  const iv = crypto.randomBytes(16); // Generate a new Initialization Vector (IV) for each encryption
-  const cipher = crypto.createCipheriv(process.env.DB_EncryptTechnique, encryptionKey, iv);
-  let encrypted = cipher.update(plaintext, "utf8", "hex");
-  encrypted += cipher.final("hex");
-  return `${iv.toString("hex")}:${encrypted}`;
-}
-
-// Function to decrypt data
-function decryptData(ciphertext) {
-  const [ivHex, encrypted] = ciphertext.split(":");
-  const iv = Buffer.from(ivHex, "hex");
-  const decipher = crypto.createDecipheriv(process.env.DB_EncryptTechnique, encryptionKey, iv);
-  let decrypted = decipher.update(encrypted, "hex", "utf8");
-  decrypted += decipher.final("utf8");
-  return decrypted;
-}
 
 async function generateIncrementalAppointmentNumber(date, collection) {
   // Query the collection for the maximum appointment number on that date

@@ -26,13 +26,13 @@ pipeline {
                 // Install backend dependencies
                 dir('Backend') {
                     echo 'Installing backend dependencies...'
-                    bat 'npm install --quiet'
+                    // bat 'npm install --quiet'
                 }
 
                 // Install frontend dependencies
                 dir('client') {
                     echo 'Installing frontend dependencies...'
-                    bat 'npm install --force --quiet'
+                    // bat 'npm install --force --quiet'
                 }
             }
         }
@@ -58,7 +58,6 @@ pipeline {
                     -Dsonar.host.url=http://ec2-18-202-48-70.eu-west-1.compute.amazonaws.com:9000 ^
                     -Dsonar.login=${SONARQUBE_TOKEN}  
                     -Dsonar.working.directory=.sonar/cache
-                    -Dsonar.cpd.threadCount=2 
                     """
                 }
             }

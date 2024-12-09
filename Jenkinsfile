@@ -46,27 +46,27 @@ pipeline {
             }
         }
 
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         script {
-        //             def scannerHome = SONAR_SCANNER_HOME
-        //             bat """
-        //             ${scannerHome}/bin/sonar-scanner.bat ^
-        //             -Dsonar.projectKey=HealthExpress ^
-        //             -Dsonar.sources=. ^
-        //             -Dsonar.host.url=http://ec2-18-202-48-70.eu-west-1.compute.amazonaws.com:9000 ^
-        //             -Dsonar.login=${SONARQUBE_TOKEN}  
-        //             """
-        //         }
-        //     }
-        // }
-
-        stage('Clean PM2 Processes') {
+        stage('SonarQube Analysis') {
             steps {
-                echo 'Deleting all existing PM2 processes...'
-                bat 'pm2 delete all' // Delete all PM2 processes, ignore errors if there are no processes running
+                script {
+                    def scannerHome = SONAR_SCANNER_HOME
+                    bat """
+                    ${scannerHome}/bin/sonar-scanner.bat ^
+                    -Dsonar.projectKey=HealthExpress ^
+                    -Dsonar.sources=. ^
+                    -Dsonar.host.url=http://ec2-18-202-48-70.eu-west-1.compute.amazonaws.com:9000 ^
+                    -Dsonar.login=${SONARQUBE_TOKEN}  
+                    """
+                }
             }
         }
+
+        // stage('Clean PM2 Processes') {
+        //     steps {
+        //         echo 'Deleting all existing PM2 processes...'
+        //         bat 'pm2 delete all' // Delete all PM2 processes, ignore errors if there are no processes running
+        //     }
+        // }
 
         stage('Deploy Backend') {
             steps {

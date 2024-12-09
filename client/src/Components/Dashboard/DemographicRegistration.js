@@ -279,7 +279,7 @@ const Register = () => {
                     <div className="col-md-6 form-group">
                       <Form.Label style={{fontWeight:"bold"}}>First Name</Form.Label>
                       <input
-                        disabled={disabledstate}
+                        disabled={true}
                         type="text"
                         name="fname"
                         className="form-control"
@@ -296,7 +296,7 @@ const Register = () => {
                     <div className="col-md-6 form-group mt-3 mt-md-0">
                       <Form.Label style={{fontWeight:"bold"}}>Last Name</Form.Label>
                       <input
-                        disabled={disabledstate}
+                        disabled={true}
                         type="text"
                         className="form-control"
                         name="lname"
@@ -314,7 +314,7 @@ const Register = () => {
                     <div className="col-md-6 form-group mt-3 mt-md-0">
                       <Form.Label style={{fontWeight:"bold"}}>Mobile Number</Form.Label>
                       <input
-                        disabled={disabledstate}
+                        disabled={true}
                         type="number"
                         className="form-control"
                         name="number"
@@ -330,7 +330,7 @@ const Register = () => {
                     <div className="col-md-6 form-group mt-3 mt-md-0">
                       <Form.Label style={{fontWeight:"bold"}}>Email</Form.Label>
                       <input
-                        disabled={disabledstate}
+                        disabled={true}
                         type="email"
                         className="form-control"
                         name="email"

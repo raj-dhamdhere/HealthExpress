@@ -215,12 +215,23 @@ const Register = () => {
         confirmButtonText: "OK",
       });
     }
-  };
+  }; 
 
   const onsubmit = async () => {
     try {
       const formattedDate = selectedDateContent.toISOString().split("T")[0];
-
+      if (
+        !formattedDate?.trim() ||
+        !doctorContent?.trim() ||
+        !appointmentSlotContent?.trim()
+      ) {
+        Swal.fire({
+          icon: "error",
+          title: "Submission Failed",
+          text: "Please fill in all required fields correctly before submitting.",
+        });
+        return;
+      }
       if (mode === "add") {
         // Save logic
         const response = await axios.post(`${API_URL}/api/saveAppointment`, {

@@ -54,6 +54,7 @@ pipeline {
                     ${scannerHome}/bin/sonar-scanner.bat ^
                     -Dsonar.projectKey=HealthExpress ^
                     -Dsonar.sources=. ^
+                    -Dsonar.exclusions=node_modules/**,build/** ^
                     -Dsonar.host.url=http://ec2-18-202-48-70.eu-west-1.compute.amazonaws.com:9000 ^
                     -Dsonar.login=${SONARQUBE_TOKEN}  
                     """
@@ -61,12 +62,12 @@ pipeline {
             }
         }
 
-        // stage('Clean PM2 Processes') {
-        //     steps {
-        //         echo 'Deleting all existing PM2 processes...'
-        //         bat 'pm2 delete all' // Delete all PM2 processes, ignore errors if there are no processes running
-        //     }
-        // }
+        stage('Clean PM2 Processes') {
+            steps {
+                echo 'Deleting all existing PM2 processes...'
+                bat 'pm2 delete all' // Delete all PM2 processes, ignore errors if there are no processes running
+            }
+        }
 
         stage('Deploy Backend') {
             steps {

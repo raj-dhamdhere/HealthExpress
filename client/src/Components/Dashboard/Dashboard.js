@@ -104,7 +104,7 @@ const Dashboard = () => {
                   <Card.Body>
                     <Card.Title>Demographic Details</Card.Title>
                     <Card.Text>
-                      Effortlessly capture and manage user demographic data with
+                      Effortlessly Capture and manage user demographic data with
                       a streamlined, user-friendly interface.
                     </Card.Text>
                     <Button

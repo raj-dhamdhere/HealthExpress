@@ -58,6 +58,7 @@ pipeline {
                     -Dsonar.host.url=http://ec2-18-202-48-70.eu-west-1.compute.amazonaws.com:9000 ^
                     -Dsonar.login=${SONARQUBE_TOKEN}  
                     -Dsonar.working.directory=.sonar/cache
+                    -Dsonar.cpd.threadCount=2 
                     """
                 }
             }

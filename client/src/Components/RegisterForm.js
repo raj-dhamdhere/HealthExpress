@@ -245,7 +245,7 @@ const Register = () => {
               <div className="php-email-form mt-4" style={styles.formContainer}>
                 <div className="row">
                   <div className="col-md-6 form-group">
-                    <Form.Label style={{ fontWeight: "bold" ,color:"blue" }}>
+                    <Form.Label style={{ fontWeight: "bold"}}>
                       First Name
                     </Form.Label>
                     <input

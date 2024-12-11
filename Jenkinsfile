@@ -21,18 +21,18 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // echo 'Installing pm2 globally...'
-                // bat 'npm install -g pm2' // Install pm2 globally
+                 bat 'npm install -g pm2' // Install pm2 globally
 
                 // Install backend dependencies
                 dir('Backend') {
                     echo 'Installing backend dependencies...'
-                    // bat 'npm install --quiet'
+                     bat 'npm install --quiet'
                 }
 
                 // Install frontend dependencies
                 dir('client') {
                     echo 'Installing frontend dependencies...'
-                    // bat 'npm install --force --quiet'
+                     bat 'npm install --force --quiet'
                 }
             }
         }

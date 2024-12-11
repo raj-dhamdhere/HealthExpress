@@ -246,7 +246,7 @@ const Register = () => {
                 <div className="row">
                   <div className="col-md-6 form-group">
                     <Form.Label style={{ fontWeight: "bold" }}>
-                      FULL Name
+                      First Name
                     </Form.Label>
                     <input
                       type="text"

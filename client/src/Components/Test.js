@@ -113,7 +113,7 @@ const Test = () => {
 				<div className="container" data-aos="zoom-in">
 					<div className="text-center">
 						<h3>Call To Action</h3>
-						<p>Our Motto is to Provide Top Notch Support To Our Customers.</p>
+						<p>Our Motto is to Provide Top Notch SUPPORT To Our Customers.</p>
 						<a className="cta-btn" href="/">Call To Action</a>
 					</div>
 				</div>
